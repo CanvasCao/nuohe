@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <title>诺禾致源</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body{
+            padding-bottom: 1rem;
+        }
+        #logo {
+            width: 20%;
+            margin: 0.8rem 0 0 0.8rem;
+        }
+
+        #welTop {
+            background: url("../img/welTop.png") no-repeat;;
+            background-size: contain;
+            height: 3rem;
+        }
+
+        #welContent {
+            box-sizing: border-box;
+            background: url("../img/welContent.png") repeat-y;
+            background-size: contain;
+            padding: 1rem 3rem;
+            margin-top: -0.5rem;
+            line-height: 1.7rem;
+            letter-spacing: -0.05rem;
+            color: #333333;
+            font-size: 1.1rem;
+        }
+
+        #welBottom {
+            background: url("../img/welBottom.png") no-repeat;
+            background-size: contain;
+            height: 7rem;
+        }
+
+        #check {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<img id='logo' src="../img/logo.png">
+
+<div id='welTop'></div>
+<div id='welContent'>
+    <div style='font-size:1.4rem;margin-bottom: 1rem;'>尊敬的 <span style='color: #609850;font-size:1.4rem ;'> 李晓红 </span>女士：
+    </div>
+    <div style='font-size:1.8rem;margin-bottom: 1rem;'>您好！</div>
+    <div> 衷心感谢您对我们的信任，选择诺禾进行您的美肤基因检测体验之旅！</div>
+    <div>现将您的基因检测结果呈现如下，请您认真阅读。如对检测报告内容有任何疑议或不解，请您务必第一时间告知我们，我们将安排专业的产品技术人员及报告解读人员为您答疑惑。</div>
+    <div>基因报告不等同于医学诊断报告。本报告以基因检测为基础为您的皮肤状态做出一定评估，值得一提的是，皮肤状态由基因和环境共同调控。因此护肤措施只是建议，碰到严重皮肤问题时，请及时到皮肤医生处就诊。</div>
+    <div style='font-weight: bold;'> 我们郑重承若：对您的所有个人信息实行严格的加密保护！</div>
+    <div>欢迎您对我们的工作提出宝贵意见。祝您永葆美丽！</div>
+</div>
+<div id='welBottom'></div>
+<div id='check' class='normalButton'>点击查看报告</div>
+
+<script src='../js/vue.min.js'></script>
+<script src='../js/jquery.min.js'></script>
+<script src='../js/response.js'></script>
+<script src='../js/fastclick.js'></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+
+        $('#check').click(function () {
+            location.href = 'report.html';
+        });
+    })
+</script>
+</body>
+</html>
