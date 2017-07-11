@@ -14,65 +14,6 @@
             padding-bottom: 5rem;
         }
 
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3.5rem;
-            background: white;
-            border-bottom: 0.5rem solid #eeeeee;
-            z-index: 2;
-        }
-
-        #logo {
-            width: 20%;
-            margin: 0.8rem;
-        }
-
-        #result {
-            box-sizing: border-box;
-            padding-top: 4rem;
-        }
-
-        .resultTitle {
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 1.4rem;
-            position: relative;
-        }
-
-        .resultSection {
-            border-radius: 0.5rem;
-            background: white;
-            margin: 0 0.5rem 2rem;
-            box-sizing: border-box;
-        }
-
-        .resultHeader {
-            position: relative;
-            box-sizing: border-box;
-            padding: 1rem;
-            padding-left: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .resultHeader::before {
-            content: '';
-            position: absolute;
-            width: 0.4rem;
-            height: 0.4rem;
-            top: 1.5rem;
-            left: 1rem;
-            background: #3A7BCC;
-            border-radius: 50%;
-        }
-
-        .resultContent {
-            box-sizing: border-box;
-            padding: 1rem;
-        }
-
         /*能力分布按钮们*/
         .abilityBtn {
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -101,29 +42,21 @@
 <div id="header">
     <img id='logo' src="../img/logo.png">
 </div>
+
 <div id='result'>
     <div class='resultTitle'>您的肤质检测结果</div>
 
     <div class='resultSection'>
         <div class="resultHeader">统计图</div>
         <div class="resultContent" style='padding: 0;'>
-            <div id='main' style='width:100%;height:30rem;font-size: 30px'></div>
+            <div id='main' style='width:100%;height:30rem;'></div>
         </div>
     </div>
 
     <div class='resultSection'>
         <div class="resultHeader">能力分布详情</div>
-        <div class="resultContent">
-            <div class='abilityBtn'><img src="../img/reportIcon/01.png">黑色素生成能力</div>
-            <div class='abilityBtn'><img src="../img/reportIcon/02.png">抗衰老能力</div>
-            <div class='abilityBtn'><img src="../img/reportIcon/03.png">抗敏感能力</div>
-            <div class='abilityBtn'><img src="../img/reportIcon/04.png">抵御粉刺能力</div>
-            <div class='abilityBtn'><img src="../img/reportIcon/05.png">抗胶原蛋白流失能力</div>
-            <div class='abilityBtn'><img src="../img/reportIcon/06.png">抵御妊娠纹能力</div>
-            <div class='abilityBtn'><img src="../img/reportIcon/07.png">维生素吸收代谢能力</div>
-        </div>
+        <div class="resultContent" id='abilityBtns'></div>
     </div>
-
 
     <div id='explain' class='normalButton'>报告阅读说明</div>
 </div>
@@ -141,6 +74,11 @@
 //        if (!window.searchJson.id) window.location.search = 'id=3';//测试的时候加默认值...
         FastClick.attach(document.body);
 
+
+        //jqObj...
+        $abilityBtns = $('#abilityBtns');
+
+        //init canvas...
         loaderHelper.show();
         require(['../js/echarts.min.js'],
             function (echarts) {
@@ -231,10 +169,21 @@
                 myChart.setOption(option);
             });
 
+        //init ability...
+        controller.direct({php: '../json/ability.json'}, function (json) {
+            [].forEach.call(json.data, function (e, i, arr) {
+                $abilityBtns.append("<div class='abilityBtn'><img src='../img/reportIcon/0" + (i + 1) + ".png'>" + e + "</div>");
+            });
 
-        $('#explain').click(function () {
-            location.href='reportExplain.html'
+            $('.abilityBtn').click(function () {
+                location.href = 'result.html?id=' + $(this).index();
+            });
         })
+
+        //bindevent...
+        $('#explain').click(function () {
+            location.href = 'reportExplain.html';
+        });
 
     })
 </script>
