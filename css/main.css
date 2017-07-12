@@ -46,6 +46,10 @@ input[type=checkbox] {
 
 }
 
+.spec {
+    color: #2C9CFF;
+}
+
 /*固定在头部的logo容器*/
 #header {
     position: fixed;
@@ -63,7 +67,7 @@ input[type=checkbox] {
     margin: 0.8rem;
 }
 
-/*result 内容容器 要预留一部分给header*****/
+/*result 内容容器 顶部要预留一部分给header*****/
 #result {
     box-sizing: border-box;
     padding-top: 4rem;
@@ -95,9 +99,9 @@ input[type=checkbox] {
 .resultHeader::before {
     content: '';
     position: absolute;
-    width: 0.4rem;
-    height: 0.4rem;
-    top: 1.5rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    top: 1.6rem;
     left: 1rem;
     background: #2C9CFF;
     border-radius: 50%;
@@ -105,5 +109,243 @@ input[type=checkbox] {
 
 .resultContent {
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+}
+
+/*内容内部******/
+.recon-title {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.recon-cirCon {
+    text-align: center;
+    position: relative;
+}
+
+.recon-cirCon img {
+    display: block;
+    width: 7rem;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.recon-cirTxt {
+    color: white;
+    position: absolute;
+    top: 2.8rem;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+/*内容里最复杂的tab的按钮*/
+.recon-tabBtns {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.recon-tabBtns > span {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    color: #666666;
+
+}
+
+.recon-tabBtns > span.current {
+    color: black;
+    position: relative;
+}
+
+.recon-tabBtns > span.current::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    width: 3rem;
+    height: 2px;
+    background: #2C9CFF;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*tab按钮点击时联动的内容******/
+.recon-tabLi {
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+}
+
+.recon-tabLiRow {
+    margin-bottom: 2rem;
+}
+
+.recon-table {
+    text-align: center;
+    width: 100%;
+}
+
+.recon-table tr {
+    height: 2.4rem;
+}
+
+.recon-tableExplain {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/*圆环图*/
+.recon-peityCon {
+    float: left;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 2rem;
+}
+
+.recon-peityTxt {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%) translateY(-50%);
+    text-align: center;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.recon-peityRight {
+    box-sizing: border-box;
+    padding: 1.8rem 0;
+    width: 60%;
+    float: right;
+}
+
+/*横条*/
+.recon-bar {
+    position: relative;
+    height: 1.4rem;
+    background: linear-gradient(to right, white, #2C9CFF);
+    border: 1px solid #eee;
+    width: 90%;
+    margin: 3rem auto 0;
+}
+
+.recon-bar .low, .recon-bar .high {
+    position: absolute;
+    top: -1.6rem;
+    font-size: 0.8rem;
+    /*transform: translateX(-50%);*/
+}
+
+.recon-bar .low {
+    left: -0.5rem;
+}
+
+.recon-bar .high {
+    right: -0.5rem;
+}
+
+.youScore, .chineseScore {
+    position: absolute;
+    left: 40%;
+    height: 2.4rem;
+    width: 0.5rem;
+    background: #2C9CFF;
+    top: -0.5rem;
+    transform: translateX(-50%);
+
+}
+
+.youScore {
+    background: #2C9CFF;
+    z-index: 2;
+}
+
+.chineseScore {
+    background: #666666;
+    left: 60%;
+}
+
+.youScore > span, .chineseScore > span {
+    position: absolute;
+    font-size: 0.4rem;
+    white-space: nowrap;
+    transform: translateX(-50%);
+}
+
+.youScore > span {
+    top: -1.4rem;
+    color: #2C9CFF;
+}
+
+.chineseScore > span {
+    bottom: -1.4rem;
+    color: #666666;
+}
+
+/*蜂窝和轮播图板块*/
+.resultTitleBg {
+    background: url("../img/titleBg.png") no-repeat;
+    background-size: contain;
+    height: 2rem;
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 2rem;
+}
+
+/*所有honeyComb*/
+.honeyContainer {
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    height: 18rem;
+    width: 100%;
+    /*border: 1px solid #000;*/
+}
+
+.honeyComb {
+    position: absolute;
+    height: 4.9736rem;
+    width: 4.5rem;
+    background: url("../img/honeyComb/honeyComb.png") no-repeat;
+    background-size: contain;
+    text-align: center;
+    word-break: break-all;
+    display: table;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+.honeyComb.alter {
+    background: url("../img/honeyComb/honeyComb2.png") no-repeat;
+    background-size: contain;
+}
+
+.honeyTxt {
+    display: table-cell;
+    vertical-align: middle;
+    color: #3881e0;
+    font-size: 1rem;
+}
+
+.honeyComb.alter .honeyTxt {
+    color: white;
+}
+
+/*vue 渐变************************************/
+.list-complete-item {
+    transition: all 0.6s ease;
+}
+
+.list-complete-enter {
+    opacity: 0;
+    transform: scale(0.2);
+}
+
+.list-complete-leave {
+}
+
+.list-complete-leave-active {
+    opacity: 0;
+    transform: scale(0.2);
 }

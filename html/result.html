@@ -7,62 +7,90 @@
     <title>诺禾致源</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/loadSimple.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
     <style>
         body {
             background: #eeeeee;
             padding-bottom: 5rem;
         }
 
-        #xingneng {
-            position: relative;
-        }
-
 
     </style>
 <body>
-<div id="header">
-    <img id='logo' src="../img/logo.png">
-</div>
-
-<div id='result'>
-    <div class='resultTitle'>黑色素生成能力</div>
-
-    <div class='resultSection'>
-        <div class="resultHeader">晒黑反应</div>
-        <div class="resultContent">
-            <div style='text-align: center;'>您的基因检测结果</div>
-            <div style='text-align: center;position: relative;'>
-                <img id='xingneng' src="../img/xingneng.png" style='display: block;width: 7rem;margin: 3rem auto;'>
-                <div style='color:white;position: absolute;top:2.5rem;left: 50%;transform: translateX(-50%)'>性能弱</div>
-            </div>
-        </div>
+<div id='app'>
+    <div id="header">
+        <img id='logo' src="../img/logo.png">
     </div>
 
-    <div class='resultSection'>
-        <div class="resultHeader">晒黑反应</div>
-        <div class="resultContent">
-            <div style='text-align: center;'>您的基因检测结果</div>
-            <div style='text-align: center;position: relative;'>
-                <img id='xingneng' src="../img/xingneng.png" style='display: block;width: 7rem;margin: 3rem auto;'>
-                <div style='color:white;position: absolute;top:2.5rem;left: 50%;transform: translateX(-50%)'>性能弱</div>
+    <div id='result'>
+        <div class='resultTitle'>黑色素生成能力</div>
+
+
+        <result-ability></result-ability>
+
+        <div class='resultSection'>
+            <div class="resultHeader">美肤指导</div>
+            <div class="resultContent">
+                <div class='resultTitleBg'>护肤建议</div>
+                <div>优选成分</div>
+                <honey-comb></honey-comb>
             </div>
         </div>
+
     </div>
-
-
 </div>
+
 
 <script src='../js/vue.min.js'></script>
 <script src='../js/jquery.min.js'></script>
-<script src='../js/response.js'></script>
 <script src='../js/fastclick.js'></script>
 <script src='../js/require.min.js'></script>
 <script src='../js/controller.js'></script>
+<script src='../js/jquery.peity.min.js'></script>
 <script>
     $(function () {
         window.searchJson = searchJson = window.location.search.searchToJson();
         if (!window.searchJson.id) window.location.search = 'id=0';//默认抗敏感能力...
         FastClick.attach(document.body);
+
+
+        window.BUS = new Vue({});
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                resultAbility: [{},],
+                resultAbility: [{},],
+                resultAbility: [{},],
+            },
+            methods: {},
+            components: {
+                'result-ability': function (resolve) {
+                    require(['../components/resultAbility.js?_=' + new Date().getTime()],
+                        function () {
+                            resolve(resultAbility);
+                        })
+                },
+                'honey-comb': function (resolve) {
+                    require(['../components/honeyComb.js?_=' + new Date().getTime()],
+                        function () {
+                            resolve(honeyComb);
+                        })
+                },
+            },
+            created: function () {
+                var that = this;
+
+            },
+            mounted: function () {
+                var that = this;
+
+
+            }
+        });
+
+
+        window.vm = vm;
 
 
     })
