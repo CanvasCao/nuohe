@@ -58,8 +58,8 @@ input[type=checkbox] {
     width: 100%;
     height: 3.5rem;
     background: white;
-    border-bottom: 0.5rem solid #eeeeee;
-    z-index: 2;
+    border-bottom: 0.3rem solid #eeeeee;
+    z-index: 200;
 }
 
 #logo {
@@ -74,10 +74,43 @@ input[type=checkbox] {
 }
 
 .resultTitle {
-    margin: 2rem 0;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     position: relative;
+    box-sizing: border-box;
+    padding: 1.8rem 1.5rem;
+    line-height: 2rem;
+}
+
+.menuBtn {
+    float: right;
+    font-size: 2rem;
+    line-height: 2rem;
+}
+
+.menuListUl {
+    position: absolute;
+    border: 1px solid #000;
+    right: 1rem;
+    top: 5rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0.4rem;
+    z-index: 100;
+}
+
+.menuListLi {
+    color: white;
+    line-height: 3rem;
+}
+
+.menuListLi.current {
+    color: #2C9CFF;
+}
+
+.menuListLi.current::after {
+    content: ' √';
 }
 
 .resultSection {
@@ -85,6 +118,8 @@ input[type=checkbox] {
     background: white;
     margin: 0 0.5rem 2rem;
     box-sizing: border-box;
+    padding-bottom: 2rem;
+    /*display: none;*/
 }
 
 .resultHeader {
@@ -172,7 +207,7 @@ input[type=checkbox] {
 /*tab按钮点击时联动的内容******/
 .recon-tabLi {
     box-sizing: border-box;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 0;
 }
 
 .recon-tabLiRow {
@@ -288,12 +323,28 @@ input[type=checkbox] {
     background-size: contain;
     height: 2rem;
     width: 30%;
-    margin: 0 auto;
+    margin: 1rem auto 1.5rem;
     text-align: center;
     line-height: 2rem;
 }
 
-/*所有honeyComb*/
+.adviseOther {
+
+}
+
+.adviseOther span {
+    border: 1px solid #000;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0 2%;
+    width: 21%;
+    text-align: center;
+    border-radius: 0.4rem;
+    border: 1px solid #c9c9c9;
+    line-height: 2rem;
+}
+
+/*所有honeyComb***************************/
 .honeyContainer {
     box-sizing: border-box;
     padding: 10px;
@@ -348,4 +399,39 @@ input[type=checkbox] {
 .list-complete-leave-active {
     opacity: 0;
     transform: scale(0.2);
+}
+
+#footerBtns {
+    background: #2C9CFF;
+    color: white;
+    box-sizing: border-box;
+    padding: 0.8rem 0.5rem;
+}
+
+#footerBtns span {
+    width: 50%;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+#footerBtns i {
+    border: 1px solid white;
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 0.4rem;
+    font-size: 1rem;
+
+}
+
+#footerBtns .toLeft {
+    float: left;
+}
+
+#footerBtns .toRight {
+    text-align: right;
+    float: right;
 }

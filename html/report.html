@@ -39,26 +39,28 @@
         }
     </style>
 <body>
-<div id="header">
-    <img id='logo' src="../img/logo.png">
-</div>
 
-<div id='result'>
-    <div class='resultTitle'>您的肤质检测结果</div>
 
-    <div class='resultSection'>
-        <div class="resultHeader">统计图</div>
-        <div class="resultContent" style='padding: 0;'>
-            <div id='main' style='width:100%;height:30rem;'></div>
+<div id="app">
+    <nuohe-header></nuohe-header>
+    <div id='result'>
+        <div class='resultTitle'>您的肤质检测结果</div>
+
+        <div class='resultSection'>
+            <div class="resultHeader">统计图</div>
+            <div class="resultContent" style='padding: 0;'>
+                <div id='main' style='width:100%;height:30rem;'></div>
+            </div>
         </div>
+
+        <div class='resultSection'>
+            <div class="resultHeader">能力分布详情</div>
+            <div class="resultContent" id='abilityBtns'></div>
+        </div>
+
+        <div id='explain' class='normalButton'>报告阅读说明</div>
     </div>
 
-    <div class='resultSection'>
-        <div class="resultHeader">能力分布详情</div>
-        <div class="resultContent" id='abilityBtns'></div>
-    </div>
-
-    <div id='explain' class='normalButton'>报告阅读说明</div>
 </div>
 
 
@@ -73,117 +75,137 @@
 //        if (!window.searchJson.id) window.location.search = 'id=3';//测试的时候加默认值...
         FastClick.attach(document.body);
 
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components: {
+                'nuohe-header': function (resolve) {
+                    require(['../components/nuoheHeader.js'],
+                        function () {
+                            resolve(nuoheHeader);
+                        })
+                },
+            },
+            created: function () {
+                var that = this;
 
-        //jqObj...
-        $abilityBtns = $('#abilityBtns');
 
-        //init canvas...
-        loaderHelper.show();
-        require(['../js/echarts.min.js'],
-            function (echarts) {
+            },
+            mounted: function () {
+                var that = this;
 
-                loaderHelper.hide();
-                var myChart = echarts.init(document.getElementById('main'));
-                var option = {
-                    title: {
+                //jqObj...
+                var $abilityBtns = $('#abilityBtns');
+
+                //init canvas...
+                loaderHelper.show();
+                require(['../js/echarts.min.js'],
+                    function (echarts) {
+
+                        loaderHelper.hide();
+                        var myChart = echarts.init(document.getElementById('main'));
+                        var option = {
+                            title: {
 //                text: '基础雷达图'
-                    },
-                    tooltip: {
+                            },
+                            tooltip: {
 //                trigger: 'axis',
-                        position: ['40%', '40%'],
+                                position: ['40%', '40%'],
 //                formatter: function (params, ticket, callback) {
 //                    console.log(JSON.stringify(params,null,'\t'))
 //                    return JSON.stringify(params,null,'\t');
 //                }
-                    },
-                    legend: {
-                        data: ['您的基因性能水平', '中国人均水平'],
-                        left: '2%',
-                        top: '2%'
-                    },
-                    radar: {
+                            },
+                            legend: {
+                                data: ['您的基因性能水平', '中国人均水平'],
+                                left: '2%',
+                                top: '2%'
+                            },
+                            radar: {
 //                shape: 'circle',
-                        radius: '70%',
-                        indicator: [
-                            {name: '防晒黑', max: 100},//雷达的最大值...
-                            {name: '抵御雀斑', max: 100},
-                            {name: '抵御太阳斑', max: 100},
-                            {name: '抗氧化', max: 100},
-                            {name: '抗糖化', max: 100},
-                            {name: '抗敏感', max: 100},
-                            {name: '抵御粉刺', max: 100},
-                            {name: '皮肤保湿', max: 100},
-                            {name: '抗胶原蛋白流失', max: 100},
-                            {name: '抵御妊娠纹', max: 100},
-                            {name: '维生素吸收代谢', max: 100},
+                                radius: '70%',
+                                indicator: [
+                                    {name: '防晒黑', max: 100},//雷达的最大值...
+                                    {name: '抵御雀斑', max: 100},
+                                    {name: '抵御太阳斑', max: 100},
+                                    {name: '抗氧化', max: 100},
+                                    {name: '抗糖化', max: 100},
+                                    {name: '抗敏感', max: 100},
+                                    {name: '抵御粉刺', max: 100},
+                                    {name: '皮肤保湿', max: 100},
+                                    {name: '抗胶原蛋白流失', max: 100},
+                                    {name: '抵御妊娠纹', max: 100},
+                                    {name: '维生素吸收代谢', max: 100},
 
-                        ],
-                        center: ['50%', '55%'],
-                        name: {
-                            show: true,
-                            formatter: function (value, indicator) {
-                                var array = value.split('');
-                                array.splice(4, 0, "\n")
+                                ],
+                                center: ['50%', '55%'],
+                                name: {
+                                    show: true,
+                                    formatter: function (value, indicator) {
+                                        var array = value.split('');
+                                        array.splice(4, 0, "\n")
 
-                                return value;
-                                return array.join('');//+ JSON.stringify(indicator);
-                            },
-                            textStyle: {
-                                color: '#333',
-                                fontStyle: 'normal',
+                                        return value;
+                                        return array.join('');//+ JSON.stringify(indicator);
+                                    },
+                                    textStyle: {
+                                        color: '#333',
+                                        fontStyle: 'normal',
 //                        fontWeight: normal,
-                                fontFamily: 'sans-serif',
+                                        fontFamily: 'sans-serif',
 //                                fontSize: 24,
-                                'text-align': 'center'
-                            },
-                        },
-                        startAngle: 90,
-                        nameGap: 00,
+                                        'text-align': 'center'
+                                    },
+                                },
+                                startAngle: 90,
+                                nameGap: 00,
 
-                    },
-                    series: [{
-                        name: '预算 vs 开销（Budget vs spending）',
-                        type: 'radar',
-                        data: [
-                            {
-                                value: [60, 70, 60, 70, 60, 70, 80, 90, 100, 90, 80, 60, 40, 60,],//销售 管理 信息技术...
-                                name: '您的基因性能水平'
                             },
-                            {
-                                value: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,],
-                                name: '中国人均水平'
-                            }
-                        ],
-                        areaStyle: {
-                            normal: {
-                                opacity: 0.2,
-                            }
-                        },
-                    }],
+                            series: [{
+                                name: '预算 vs 开销（Budget vs spending）',
+                                type: 'radar',
+                                data: [
+                                    {
+                                        value: [60, 70, 60, 70, 60, 70, 80, 90, 100, 90, 80, 60, 40, 60,],//销售 管理 信息技术...
+                                        name: '您的基因性能水平'
+                                    },
+                                    {
+                                        value: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,],
+                                        name: '中国人均水平'
+                                    }
+                                ],
+                                areaStyle: {
+                                    normal: {
+                                        opacity: 0.2,
+                                    }
+                                },
+                            }],
 //                    textStyle: {
 //                        fontSize: 24,
 //                    },
-                    color: ['#ff3c00', '#00bdff']
-                };
-                myChart.setOption(option);
-            });
+                            color: ['#ff3c00', '#00bdff']
+                        };
+                        myChart.setOption(option);
+                    });
 
-        //init ability...
-        controller.direct({php: '../json/ability.json'}, function (json) {
-            [].forEach.call(json.data, function (e, i, arr) {
-                $abilityBtns.append("<div class='abilityBtn'><img src='../img/reportIcon/0" + (i + 1) + ".png'>" + e + "</div>");
-            });
+                //init ability...
+                controller.direct({php: '../json/ability.json'}, function (json) {
+                    [].forEach.call(json.data, function (e, i, arr) {
+                        $abilityBtns.append("<div class='abilityBtn'><img src='../img/reportIcon/0" + (i + 1) + ".png'>" + e + "</div>");
+                    });
 
-            $('.abilityBtn').click(function () {
-                location.href = 'result.html?id=' + $(this).index();
-            });
-        })
+                    $('.abilityBtn').click(function () {
+                        location.href = 'result.html?id=' + $(this).index();
+                    });
+                });
 
-        //bindevent...
-        $('#explain').click(function () {
-            location.href = 'reportExplain.html';
+                //bindevent...
+                $('#explain').click(function () {
+                    location.href = 'reportExplain.html';
+                });
+            }
         });
-
     })
 </script>
 </body>

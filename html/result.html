@@ -11,21 +11,28 @@
     <style>
         body {
             background: #eeeeee;
-            padding-bottom: 5rem;
         }
-
-
     </style>
 <body>
 <div id='app'>
-    <div id="header">
-        <img id='logo' src="../img/logo.png">
-    </div>
+    <nuohe-header></nuohe-header>
 
     <div id='result'>
-        <div class='resultTitle'>黑色素生成能力</div>
 
+        <!-- 整个标题加上菜单 -->
+        <div class='resultTitle'>
+            {{menuArray[abilityId]}}详情
+            <span class='menuBtn ion-navicon' @click='menuToggle'></span>
+            <div class='menuListUl' v-show='ifMenuShow'>
+                <template v-for='(item,index) in menuArray'>
+                    <div @click='changeMenu($event,index)' class='menuListLi' :class="(index==abilityId)?'current':'' ">
+                        {{item}}
+                    </div>
+                </template>
+            </div>
+        </div>
 
+        <!--table和circle图的能力section-->
         <result-ability></result-ability>
 
         <div class='resultSection'>
@@ -34,9 +41,26 @@
                 <div class='resultTitleBg'>护肤建议</div>
                 <div>优选成分</div>
                 <honey-comb></honey-comb>
+                <div>产品建议</div>
+                <div>123</div>
+
+                <div class='resultTitleBg'>其它建议</div>
+                <div class='adviseOther'>
+                    <span>SLS</span><span>SLES</span><span>皂基</span><span>薄荷</span>
+                </div>
             </div>
         </div>
 
+
+        <!-- 机理 -->
+        <result-principle></result-principle>
+    </div>
+
+    <div id='footerBtns'>
+        <span @click='toLeft($event)' class='toLeft' v-if='abilityId>0'><i class='ion-chevron-left'></i>{{menuArray[abilityId-1]}}</span>
+        <span @click='toRight($event)' class='toRight' v-if='abilityId<menuArray.length-1'>{{menuArray[parseInt(abilityId)+1]}}<i
+                class='ion-chevron-right'></i></span>
+        <div style='clear: both;'></div>
     </div>
 </div>
 
@@ -59,20 +83,52 @@
         var vm = new Vue({
             el: '#app',
             data: {
+                abilityId: 0,
+                ifMenuShow: false,
+                menuArray: ['黑色素生成能力', '抗衰老能力', '抗敏感能力', '抵御粉刺能力', '抗胶原蛋白流失能力', '抵御妊娠纹能力', '维生素吸收代谢能力'],
+
+
                 resultAbility: [{},],
                 resultAbility: [{},],
                 resultAbility: [{},],
             },
-            methods: {},
+            methods: {
+                menuToggle: function () {
+                    this.ifMenuShow = !this.ifMenuShow;
+                },
+                changeMenu: function (e, index) {
+                    location.href = 'result.html?id=' + index;
+                },
+                toLeft: function () {
+                    var that = this;
+                    that.changeMenu(null, parseInt(that.abilityId) - 1);
+                },
+                toRight: function () {
+                    var that = this;
+                    that.changeMenu(null, parseInt(that.abilityId) + 1);
+                },
+            },
             components: {
+                'nuohe-header': function (resolve) {
+                    require(['../components/nuoheHeader.js'],
+                        function () {
+                            resolve(nuoheHeader);
+                        })
+                },
                 'result-ability': function (resolve) {
-                    require(['../components/resultAbility.js?_=' + new Date().getTime()],
+                    require(['../components/resultAbility.js'],
                         function () {
                             resolve(resultAbility);
                         })
                 },
+                'result-principle': function (resolve) {
+                    require(['../components/resultPrinciple.js'],
+                        function () {
+                            resolve(resultPrinciple);
+                        })
+                },
                 'honey-comb': function (resolve) {
-                    require(['../components/honeyComb.js?_=' + new Date().getTime()],
+                    require(['../components/honeyComb.js'],
                         function () {
                             resolve(honeyComb);
                         })
@@ -81,14 +137,14 @@
             created: function () {
                 var that = this;
 
+                //根据url更新全局索引...
+                this.abilityId = searchJson.id;
+
             },
             mounted: function () {
                 var that = this;
-
-
             }
         });
-
 
         window.vm = vm;
 
