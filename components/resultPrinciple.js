@@ -1,20 +1,8 @@
 var resultPrinciple = Vue.extend({
-    props: [],
+    props: ["pArray"],
 
     data: function () {
-        return {
-            //机理数组
-            pArray: [
-                {
-                    desc: '抗氧化机理：',
-                    imgUrl: '../img/jili/jili1.png'
-                },
-                {
-                    desc: '抗氧糖化机理：',
-                    imgUrl: '../img/jili/jili2.png'
-                },
-            ],
-        }
+        return {}
     },
 
 

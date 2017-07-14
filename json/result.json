@@ -1,10 +1,132 @@
 {
-  "data": [
-    {
-      "type": 0
-    },
-    {
-    }
-  ]
+  "data": {
+    "resultAbility": [
+      {
+        "abilityName": "晒黑反应",
+        "abilityResult": "性能弱",
+        "dataTable": [
+          {
+            "b": false,
+            "data": [
+              "检测基因",
+              "Rs-Number",
+              "正常基因",
+              "你的基因"
+            ]
+          },
+          {
+            "b": false,
+            "data": [
+              "IRF4",
+              "rs1001179",
+              "CC",
+              "CC"
+            ]
+          },
+          {
+            "b": true,
+            "data": [
+              "IRF4",
+              "rs1001179",
+              "CC",
+              "CC"
+            ]
+          },
+          {
+            "b": false,
+            "data": [
+              "IRF4",
+              "rs1001179",
+              "CC",
+              "CC"
+            ]
+          }
+        ],
+        "yourScore": 66.8,
+        "chineseScore": 80.4
+      },
+      {
+        "abilityName": "晒黑反应2",
+        "abilityResult": "性能强",
+        "dataTable": [
+          {
+            "b": false,
+            "data": [
+              "检测基因",
+              "Rs-Number",
+              "正常基因",
+              "你的基因"
+            ]
+          },
+          {
+            "b": false,
+            "data": [
+              "IRF4",
+              "rs1001179",
+              "CC",
+              "CC"
+            ]
+          },
+          {
+            "b": true,
+            "data": [
+              "IRF4",
+              "rs1001179",
+              "CC",
+              "CC"
+            ]
+          }
+        ],
+        "yourScore": 6.8,
+        "chineseScore": 8.4
+      }
+    ],
+    "resultGuide": [
+      {
+        "honeyCombArray": [
+          "抗过敏抗过敏",
+          "抗过敏",
+          "抗过敏抗过敏",
+          "抗过敏",
+          "抗过敏抗过敏",
+          "抗过敏",
+          "抗过敏抗过敏",
+          "抗过敏",
+          "抗过敏抗过敏",
+          "抗过敏"
+        ],
+        "productArray": [
+          {
+            "imgUrl": "../img/product/img.png",
+            "desc": "有舒缓镇静肌肤的作用"
+          },
+          {
+            "imgUrl": "../img/product/img.png",
+            "desc": "有舒缓镇静肌肤的作用2"
+          }
+        ],
+        "adviseOtherArray": [
+          "SLS",
+          "SLS",
+          "SLS",
+          "SLS"
+        ]
+      }
+    ],
+    "resultPrinciple": [
+      {
+        "pArray": [
+          {
+            "desc": "抗氧化机理：",
+            "imgUrl": "../img/jili/jili1.png"
+          },
+          {
+            "desc": "抗氧糖化机理：",
+            "imgUrl": "../img/jili/jili2.png"
+          }
+        ]
+      }
+    ]
+  }
 }
 

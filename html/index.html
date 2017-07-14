@@ -46,16 +46,16 @@
         }
     </style>
 <body>
+
 <div id="app">
     <nuohe-header></nuohe-header>
     <div id="middle">
         <div>
             <img id='inputBg' src="../img/loginBg.png" width='100%'>
-            <input id='input' type="text" placeholder='请输入提取码'>
+            <input v-model='code' id='input' type="text" placeholder='请输入提取码'>
         </div>
-        <div id='login' class='normalButton'>登录</div>
+        <div @click='login' id='login' class='normalButton'>登录</div>
     </div>
-
 </div>
 
 <script src='../js/vue.min.js'></script>
@@ -70,11 +70,24 @@
         FastClick.attach(document.body);
 
 
-
         var vm = new Vue({
             el: '#app',
-            data: {},
-            methods: {},
+            data: {
+                code: '',
+            },
+            methods: {
+                login: function () {
+                    var that = this;
+
+                    controller.direct({php: '../json/login.json', params: {code: that.code}}, function (json) {
+                        console.log(JSON.stringify(json));
+                        localStorage.setItem('userName', json.userName);
+                        localStorage.setItem('userId', json.userId);
+                        location.href = 'welcome.html';
+                    });
+
+                }
+            },
             components: {
                 'nuohe-header': function (resolve) {
                     require(['../components/nuoheHeader.js'],
@@ -85,19 +98,9 @@
             },
             created: function () {
                 var that = this;
-
-
             },
             mounted: function () {
                 var that = this;
-                $('#login').click(function () {
-                    console.log('登陆');
-                    location.href = 'welcome.html';
-
-                    //登陆...
-                    localStorage.setItem('uid', 1);
-
-                })
             }
         });
     })

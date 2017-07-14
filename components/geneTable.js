@@ -1,28 +1,10 @@
 var geneTable = Vue.extend({
-    props: [],
+    props: [
+        'dataTable',
+    ],
 
     data: function () {
-        return {
-            dataTable: [
-                {
-                    b: false,
-                    data: ["检测基因", "Rs-Number", "正常基因", "你的基因"]
-                },
-                {
-                    b: false,
-                    data: ["IRF4", "rs1001179", "CC", "CC"],
-                },
-                {
-                    b: true,
-                    data: ["IRF4", "rs1001179", "CC", "CC"],
-                },
-                {
-                    b: false,
-                    data: ["IRF4", "rs1001179", "CC", "CC"],
-                },
-
-            ],
-        }
+        return {}
     },
 
 

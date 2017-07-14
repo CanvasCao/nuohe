@@ -260,26 +260,26 @@ input[type=checkbox] {
     height: 1.4rem;
     background: linear-gradient(to right, white, #2C9CFF);
     border: 1px solid #eee;
-    width: 90%;
+    width: 80%;
     margin: 3rem auto 0;
 }
 
 .recon-bar .low, .recon-bar .high {
     position: absolute;
-    top: -1.6rem;
-    font-size: 0.8rem;
-    /*transform: translateX(-50%);*/
+    font-size: 1.2rem;
+    line-height: 1.4rem;
 }
 
 .recon-bar .low {
-    left: -0.5rem;
+    left: -2rem;
 }
 
 .recon-bar .high {
-    right: -0.5rem;
+    right: -2rem;
 }
 
 .youScore, .chineseScore {
+    font-size: 0.8rem;
     position: absolute;
     left: 40%;
     height: 2.4rem;
@@ -317,7 +317,7 @@ input[type=checkbox] {
     color: #666666;
 }
 
-/*蜂窝和轮播图板块*/
+/*蜂窝和轮播图板块****************/
 .resultTitleBg {
     background: url("../img/titleBg.png") no-repeat;
     background-size: contain;
@@ -326,6 +326,50 @@ input[type=checkbox] {
     margin: 1rem auto 1.5rem;
     text-align: center;
     line-height: 2rem;
+}
+
+.carousel {
+    position: relative;
+    height: 20rem;
+    margin: 0 auto 1rem;
+}
+
+.carouselRight, .carouselLeft {
+    color: #2C9CFF;
+    position: absolute;
+    top: 5rem;
+    font-size: 2rem;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.carouselLeft {
+    left: 0rem;
+}
+
+.carouselRight {
+    right: 0rem;
+}
+
+.carouselSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+}
+
+.carouselSection img {
+    height: 12rem;
+    display: block;
+    margin: 0 auto 2rem;
+}
+
+.carouselSection .carouselDesc {
+    height: 6rem;
+    font-size: 1rem;
 }
 
 .adviseOther {
@@ -401,6 +445,7 @@ input[type=checkbox] {
     transform: scale(0.2);
 }
 
+/*底部左右跳转按钮*/
 #footerBtns {
     background: #2C9CFF;
     color: white;

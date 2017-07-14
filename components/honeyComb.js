@@ -1,5 +1,5 @@
 var honeyComb = Vue.extend({
-    props: [],
+    props: ['honeyCombArray'],
 
     data: function () {
         return {
@@ -7,7 +7,7 @@ var honeyComb = Vue.extend({
             dY: -15,
             xRate: 8.2,
             yRate: 22.4,
-            honeyArr: [
+            honeyStyleArr: [
                 {left: 2, top: 1, color: 'white'},
                 {left: 3, top: 2},
                 {left: 5, top: 2, color: 'white'},
@@ -19,7 +19,6 @@ var honeyComb = Vue.extend({
                 {left: 10, top: 3, color: 'white'},
                 {left: 6, top: 3},//10
             ],
-            items: [],
         }
     },
 
@@ -27,7 +26,7 @@ var honeyComb = Vue.extend({
     template: '\
      <div class="honeyContainer">\
           <transition-group name="list-complete">\
-            <template v-for="(item,index) in items">\
+            <template v-for="(item,index) in honeyCombArray">\
             <div :style="honeyCombStyle(index)" v-bind:key="item" class="honeyComb list-complete-item"  :class="honeyCombClassName(index)">\
                 <span class="honeyTxt">{{item}}</span>\
             </div>\
@@ -43,25 +42,24 @@ var honeyComb = Vue.extend({
             var that = this;
 
             var json = {
-                left: (that.honeyArr[index].left * that.xRate + that.dX) + "%",
-                top: (that.honeyArr[index].top * that.yRate + that.dY) + "%",
+                left: (that.honeyStyleArr[index].left * that.xRate + that.dX) + "%",
+                top: (that.honeyStyleArr[index].top * that.yRate + that.dY) + "%",
                 transition: "all " + index / 10 + "s ease"
             };
 
-            return json
+            return json;
 
         },
         honeyCombClassName: function (index) {
-            var res = (this.honeyArr[index].color == "white") ? "alter" : "";
+            var res = (this.honeyStyleArr[index].color == "white") ? "alter" : "";
             return res;
         }
     },
     mounted: function () {
         var that = this;
-        this.items = ['抗过敏抗过敏', '抗过敏', '抗过敏抗过敏', '抗过敏', '抗过敏抗过敏', '抗过敏', '抗过敏抗过敏', '抗过敏', '抗过敏抗过敏', '抗过敏'];
     },
     computed: {}
 
 
-// :class="(honeyArr[index].color=="white")?"alter":""
+// :class="(honeyStyleArr[index].color=="white")?"alter":""
 })

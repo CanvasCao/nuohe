@@ -43,11 +43,14 @@
 
 <div id="app">
     <nuohe-header></nuohe-header>
+
     <div id='result'>
         <div class='resultTitle'>您的肤质检测结果</div>
 
         <div class='resultSection'>
             <div class="resultHeader">统计图</div>
+
+            <!-- canvas不需要padding -->
             <div class="resultContent" style='padding: 0;'>
                 <div id='main' style='width:100%;height:30rem;'></div>
             </div>
@@ -55,10 +58,16 @@
 
         <div class='resultSection'>
             <div class="resultHeader">能力分布详情</div>
-            <div class="resultContent" id='abilityBtns'></div>
+            <div class="resultContent" id='abilityBtns'>
+                <template v-for='(item,index) in abilityArray'>
+                    <div @click='toResult($event,index)' class='abilityBtn'>
+                        <img :src='getNewSrc(index)'>{{item}}能力
+                    </div>
+                </template>
+            </div>
         </div>
 
-        <div id='explain' class='normalButton'>报告阅读说明</div>
+        <div @click='toReportExplain' id='explain' class='normalButton'>报告阅读说明</div>
     </div>
 
 </div>
@@ -71,14 +80,26 @@
 <script src='../js/controller.js'></script>
 <script>
     $(function () {
-//        window.searchJson = searchJson = window.location.search.searchToJson();
-//        if (!window.searchJson.id) window.location.search = 'id=3';//测试的时候加默认值...
         FastClick.attach(document.body);
 
         var vm = new Vue({
             el: '#app',
-            data: {},
-            methods: {},
+            data: {
+                abilityArray: []
+            },
+            methods: {
+                toReportExplain: function () {
+                    location.href = 'reportExplain.html';
+                },
+                toResult: function (e, i) {
+                    location.href = 'result.html?id=' + i;
+                },
+
+                //过滤器...
+                getNewSrc: function (i) {
+                    return '../img/reportIcon/0' + (i + 1) + '.png';
+                }
+            },
             components: {
                 'nuohe-header': function (resolve) {
                     require(['../components/nuoheHeader.js'],
@@ -95,115 +116,81 @@
             mounted: function () {
                 var that = this;
 
-                //jqObj...
-                var $abilityBtns = $('#abilityBtns');
-
                 //init canvas...
                 loaderHelper.show();
                 require(['../js/echarts.min.js'],
                     function (echarts) {
 
-                        loaderHelper.hide();
-                        var myChart = echarts.init(document.getElementById('main'));
-                        var option = {
-                            title: {
-//                text: '基础雷达图'
-                            },
-                            tooltip: {
-//                trigger: 'axis',
-                                position: ['40%', '40%'],
-//                formatter: function (params, ticket, callback) {
-//                    console.log(JSON.stringify(params,null,'\t'))
-//                    return JSON.stringify(params,null,'\t');
-//                }
-                            },
-                            legend: {
-                                data: ['您的基因性能水平', '中国人均水平'],
-                                left: '2%',
-                                top: '2%'
-                            },
-                            radar: {
+                        controller.direct({php: '../json/radar.json'}, function (json) {
+                            loaderHelper.hide();
+
+                            var myChart = echarts.init(document.getElementById('main'));
+                            var option = {
+                                tooltip: {
+                                    position: ['40%', '40%'],
+                                },
+                                legend: {
+                                    data: ['您的基因性能水平', '中国人均水平'],
+                                    left: '2%',
+                                    top: '2%'
+                                },
+                                radar: {
 //                shape: 'circle',
-                                radius: '70%',
-                                indicator: [
-                                    {name: '防晒黑', max: 100},//雷达的最大值...
-                                    {name: '抵御雀斑', max: 100},
-                                    {name: '抵御太阳斑', max: 100},
-                                    {name: '抗氧化', max: 100},
-                                    {name: '抗糖化', max: 100},
-                                    {name: '抗敏感', max: 100},
-                                    {name: '抵御粉刺', max: 100},
-                                    {name: '皮肤保湿', max: 100},
-                                    {name: '抗胶原蛋白流失', max: 100},
-                                    {name: '抵御妊娠纹', max: 100},
-                                    {name: '维生素吸收代谢', max: 100},
-
-                                ],
-                                center: ['50%', '55%'],
-                                name: {
-                                    show: true,
-                                    formatter: function (value, indicator) {
-                                        var array = value.split('');
-                                        array.splice(4, 0, "\n")
-
-                                        return value;
-                                        return array.join('');//+ JSON.stringify(indicator);
+                                    radius: '70%',
+                                    indicator: json.nameArray.map(function (e) {
+                                        return {name: e, max: 100};
+                                    }),
+                                    center: ['50%', '55%'],
+                                    name: {
+                                        show: true,
+                                        formatter: function (value, indicator) {
+                                            return value;
+                                        },
+                                        textStyle: {
+                                            color: '#333',
+                                            fontStyle: 'normal',
+                                            // fontWeight: normal,
+                                            fontFamily: 'sans-serif',
+                                            // fontSize: 24,
+                                            'text-align': 'center'
+                                        },
                                     },
-                                    textStyle: {
-                                        color: '#333',
-                                        fontStyle: 'normal',
-//                        fontWeight: normal,
-                                        fontFamily: 'sans-serif',
-//                                fontSize: 24,
-                                        'text-align': 'center'
-                                    },
+                                    startAngle: 90,
+                                    nameGap: 00,
+
                                 },
-                                startAngle: 90,
-                                nameGap: 00,
-
-                            },
-                            series: [{
-                                name: '预算 vs 开销（Budget vs spending）',
-                                type: 'radar',
-                                data: [
-                                    {
-                                        value: [60, 70, 60, 70, 60, 70, 80, 90, 100, 90, 80, 60, 40, 60,],//销售 管理 信息技术...
-                                        name: '您的基因性能水平'
+                                series: [{
+                                    name: '预算 vs 开销（Budget vs spending）',
+                                    type: 'radar',
+                                    data: [
+                                        {
+                                            value: json.yourGene,
+                                            name: '您的基因性能水平'
+                                        },
+                                        {
+                                            value: json.chineseGene,
+                                            name: '中国人均水平'
+                                        }
+                                    ],
+                                    areaStyle: {
+                                        normal: {
+                                            opacity: 0.2,
+                                        }
                                     },
-                                    {
-                                        value: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,],
-                                        name: '中国人均水平'
-                                    }
-                                ],
-                                areaStyle: {
-                                    normal: {
-                                        opacity: 0.2,
-                                    }
-                                },
-                            }],
-//                    textStyle: {
-//                        fontSize: 24,
-//                    },
-                            color: ['#ff3c00', '#00bdff']
-                        };
-                        myChart.setOption(option);
+                                }],
+                                color: ['#ff3c00', '#00bdff']
+                            };
+                            myChart.setOption(option);
+                        })
+
+
                     });
 
                 //init ability...
                 controller.direct({php: '../json/ability.json'}, function (json) {
-                    [].forEach.call(json.data, function (e, i, arr) {
-                        $abilityBtns.append("<div class='abilityBtn'><img src='../img/reportIcon/0" + (i + 1) + ".png'>" + e + "</div>");
-                    });
-
-                    $('.abilityBtn').click(function () {
-                        location.href = 'result.html?id=' + $(this).index();
-                    });
+                    that.abilityArray = json.data;
                 });
 
-                //bindevent...
-                $('#explain').click(function () {
-                    location.href = 'reportExplain.html';
-                });
             }
         });
     })

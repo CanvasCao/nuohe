@@ -26,40 +26,46 @@
             <div class='menuListUl' v-show='ifMenuShow'>
                 <template v-for='(item,index) in menuArray'>
                     <div @click='changeMenu($event,index)' class='menuListLi' :class="(index==abilityId)?'current':'' ">
-                        {{item}}
+                        {{item}}能力
                     </div>
                 </template>
             </div>
         </div>
 
-        <!--table和circle图的能力section-->
-        <result-ability></result-ability>
+        <!-- dataTable和peityCircle 的components -->
+        <result-ability
+                v-for='(item,index) in resultAbility'
+                :index="index"
+                :key="index"
+                :ability-name="item.abilityName"
+                :ability-result="item.abilityResult"
+                :data-table="item.dataTable"
+                :your-score="item.yourScore"
+                :chinese-score="item.chineseScore">
+        </result-ability>
 
-        <div class='resultSection'>
-            <div class="resultHeader">美肤指导</div>
-            <div class="resultContent">
-                <div class='resultTitleBg'>护肤建议</div>
-                <div>优选成分</div>
-                <honey-comb></honey-comb>
-                <div>产品建议</div>
-                <div>123</div>
-
-                <div class='resultTitleBg'>其它建议</div>
-                <div class='adviseOther'>
-                    <span>SLS</span><span>SLES</span><span>皂基</span><span>薄荷</span>
-                </div>
-            </div>
-        </div>
-
+        <!-- 蜂巢加轮播 -->
+        <result-guide v-for='(item,index) in resultGuide'
+                      :index="index"
+                      :key="index"
+                      :honey-comb-array="item.honeyCombArray"
+                      :product-array="item.productArray"
+                      :advise-other-array="item.adviseOtherArray"
+        >
+        </result-guide>
 
         <!-- 机理 -->
-        <result-principle></result-principle>
+        <result-principle v-for='(item,index) in resultPrinciple'
+                          :index="index"
+                          :key="index"
+                          :p-array="item.pArray">
+        </result-principle>
     </div>
 
     <div id='footerBtns'>
-        <span @click='toLeft($event)' class='toLeft' v-if='abilityId>0'><i class='ion-chevron-left'></i>{{menuArray[abilityId-1]}}</span>
-        <span @click='toRight($event)' class='toRight' v-if='abilityId<menuArray.length-1'>{{menuArray[parseInt(abilityId)+1]}}<i
-                class='ion-chevron-right'></i></span>
+        <span @click='toLeft($event)' class='toLeft' v-if='abilityId>0'><i class='ion-chevron-left'></i>{{menuArray[abilityId-1]}}能力</span>
+        <span @click='toRight($event)' class='toRight' v-if='abilityId<menuArray.length-1'>
+            {{menuArray[parseInt(abilityId)+1]}}能力<i class='ion-chevron-right'></i></span>
         <div style='clear: both;'></div>
     </div>
 </div>
@@ -85,12 +91,12 @@
             data: {
                 abilityId: 0,
                 ifMenuShow: false,
-                menuArray: ['黑色素生成能力', '抗衰老能力', '抗敏感能力', '抵御粉刺能力', '抗胶原蛋白流失能力', '抵御妊娠纹能力', '维生素吸收代谢能力'],
+                menuArray: [],
 
 
-                resultAbility: [{},],
-                resultAbility: [{},],
-                resultAbility: [{},],
+                resultAbility: [],
+                resultGuide: [],
+                resultPrinciple: [],
             },
             methods: {
                 menuToggle: function () {
@@ -121,16 +127,16 @@
                             resolve(resultAbility);
                         })
                 },
+                'result-guide': function (resolve) {
+                    require(['../components/resultGuide.js'],
+                        function () {
+                            resolve(resultGuide);
+                        })
+                },
                 'result-principle': function (resolve) {
                     require(['../components/resultPrinciple.js'],
                         function () {
                             resolve(resultPrinciple);
-                        })
-                },
-                'honey-comb': function (resolve) {
-                    require(['../components/honeyComb.js'],
-                        function () {
-                            resolve(honeyComb);
                         })
                 },
             },
@@ -139,6 +145,18 @@
 
                 //根据url更新全局索引...
                 this.abilityId = searchJson.id;
+
+                //init ability...
+                controller.direct({php: '../json/ability.json'}, function (json) {
+                    that.menuArray = json.data;
+                });
+
+                //init result...
+                controller.direct({php: '../json/result.json', params: {abilityId: searchJson.id}}, function (json) {
+                    that.resultAbility = json.data.resultAbility;
+                    that.resultGuide = json.data.resultGuide;
+                    that.resultPrinciple = json.data.resultPrinciple;
+                });
 
             },
             mounted: function () {

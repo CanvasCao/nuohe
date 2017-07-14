@@ -17,7 +17,7 @@
 ;
 (function (w, d, $, undefined) {
     var debug = true;
-    window.jimiHost = (debug) ? '' : 'http://ws.jimi.la/wangshi/wangshi/web/';
+    var jimiHost = (debug) ? '' : 'http://ws.jimi.la/wangshi/wangshi/web/';
     var controller = {};
     controller.index = 10000;
     controller.directp = function (json, cb, cbError) {
