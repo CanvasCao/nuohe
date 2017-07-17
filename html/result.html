@@ -12,16 +12,59 @@
         body {
             background: #eeeeee;
         }
+
+        .menuBtn {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.2rem;
+            line-height: 2rem;
+            height: 2rem;
+            width: 2rem;
+            display: inline-block;
+        }
+
+        .menuListUl {
+            position: absolute;
+            border: 1px solid #000;
+            right: 1rem;
+            top: 5rem;
+            box-sizing: border-box;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 0.4rem;
+            z-index: 200;
+        }
+
+        .menuListLi {
+            color: white;
+            line-height: 3rem;
+        }
+
+        .menuListLi.current {
+            color: #2C9CFF;
+        }
+
+        #mask {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 199;
+            opacity: 0.5;
+        }
     </style>
 <body>
+
 <div id='app'>
     <nuohe-header></nuohe-header>
-
+    <div id='mask' @click='menuToggle' @touchmove='touchstart($event)' v-show='ifMenuShow'></div>
     <div id='result'>
 
         <!-- 整个标题加上菜单 -->
         <div class='resultTitle'>
-            {{menuArray[abilityId]}}详情
+            {{menuArray[abilityId]}}能力详情
             <span class='menuBtn ion-navicon' @click='menuToggle'></span>
             <div class='menuListUl' v-show='ifMenuShow'>
                 <template v-for='(item,index) in menuArray'>
@@ -41,7 +84,8 @@
                 :ability-result="item.abilityResult"
                 :data-table="item.dataTable"
                 :your-score="item.yourScore"
-                :chinese-score="item.chineseScore">
+                :chinese-score="item.chineseScore"
+                :tags="item.tags">
         </result-ability>
 
         <!-- 蜂巢加轮播 -->
@@ -99,11 +143,14 @@
                 resultPrinciple: [],
             },
             methods: {
+                touchstart:function(e){
+                    e.preventDefault();
+                },
                 menuToggle: function () {
                     this.ifMenuShow = !this.ifMenuShow;
                 },
                 changeMenu: function (e, index) {
-                    location.href = 'result.html?id=' + index;
+                    location.replace('result.html?id=' + index);
                 },
                 toLeft: function () {
                     var that = this;

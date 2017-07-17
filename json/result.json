@@ -43,7 +43,15 @@
           }
         ],
         "yourScore": 66.8,
-        "chineseScore": 80.4
+        "chineseScore": 80.4,
+        "tags": [
+          "纹理凹凸不平",
+          "皱纹",
+          "纹理凹凸不平",
+          "皱纹",
+          "纹理凹凸不平",
+          "皱纹"
+        ]
       },
       {
         "abilityName": "晒黑反应2",
@@ -78,31 +86,84 @@
           }
         ],
         "yourScore": 6.8,
-        "chineseScore": 8.4
+        "chineseScore": 8.4,
+        "tags": [
+          "纹理凹凸不平",
+          "皱纹",
+          "纹理凹凸不平",
+          "皱纹",
+          "纹理凹凸不平",
+          "皱纹"
+        ]
       }
     ],
     "resultGuide": [
       {
         "honeyCombArray": [
-          "抗过敏抗过敏",
-          "抗过敏",
-          "抗过敏抗过敏",
-          "抗过敏",
-          "抗过敏抗过敏",
-          "抗过敏",
-          "抗过敏抗过敏",
-          "抗过敏",
-          "抗过敏抗过敏",
-          "抗过敏"
+          {
+            "id": "aaa",
+            "name": "抗过敏抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏抗过敏"
+          },
+          {
+            "id": "aaa",
+            "name": "抗过敏"
+          }
         ],
         "productArray": [
           {
             "imgUrl": "../img/product/img.png",
-            "desc": "有舒缓镇静肌肤的作用"
+            "desc": "有舒缓镇静肌肤的作用",
+            "id": "aaa"
           },
           {
             "imgUrl": "../img/product/img.png",
-            "desc": "有舒缓镇静肌肤的作用2"
+            "desc": "有舒缓镇静肌肤的作用2",
+            "id": "aaa"
+          },
+          {
+            "imgUrl": "../img/product/img.png",
+            "desc": "有舒缓镇静肌肤的作用3",
+            "id": "aaa"
           }
         ],
         "adviseOtherArray": [

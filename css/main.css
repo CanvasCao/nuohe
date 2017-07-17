@@ -59,7 +59,7 @@ input[type=checkbox] {
     height: 3.5rem;
     background: white;
     border-bottom: 0.3rem solid #eeeeee;
-    z-index: 200;
+    z-index: 100;
 }
 
 #logo {
@@ -78,39 +78,8 @@ input[type=checkbox] {
     font-size: 1.3rem;
     position: relative;
     box-sizing: border-box;
-    padding: 1.8rem 1.5rem;
+    padding: 1.8rem 0rem;
     line-height: 2rem;
-}
-
-.menuBtn {
-    float: right;
-    font-size: 2rem;
-    line-height: 2rem;
-}
-
-.menuListUl {
-    position: absolute;
-    border: 1px solid #000;
-    right: 1rem;
-    top: 5rem;
-    box-sizing: border-box;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 0.4rem;
-    z-index: 100;
-}
-
-.menuListLi {
-    color: white;
-    line-height: 3rem;
-}
-
-.menuListLi.current {
-    color: #2C9CFF;
-}
-
-.menuListLi.current::after {
-    content: ' √';
 }
 
 .resultSection {
@@ -127,7 +96,7 @@ input[type=checkbox] {
     box-sizing: border-box;
     padding: 1rem;
     padding-left: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     color: #2C9CFF;
 }
 
@@ -144,7 +113,7 @@ input[type=checkbox] {
 
 .resultContent {
     box-sizing: border-box;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 1.5rem;
 }
 
 /*内容内部******/
@@ -156,12 +125,14 @@ input[type=checkbox] {
 .recon-cirCon {
     text-align: center;
     position: relative;
+    margin: 2rem 0;
+    white-space: nowrap;
 }
 
 .recon-cirCon img {
     display: block;
     width: 7rem;
-    margin: 2rem auto;
+    margin: 0 auto;
     position: relative;
 }
 
@@ -170,12 +141,46 @@ input[type=checkbox] {
     position: absolute;
     top: 2.8rem;
     left: 50%;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
+
+}
+
+.recon-tag {
+    position: absolute;
+    color: #666666;
+    border: 1px solid #eee;
+    font-size: 0.8rem;
+    /*box-sizing: border-box;*/
+    padding: 0rem 0.8rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.recon-tagLeft::before {
+    content: '';
+    position: absolute;
+    background: url('../img/tag-right.png') no-repeat;
+    background-size: contain;
+    top: 0;
+    right: -0.7rem;
+    width: 0.7rem;
+    height: 1.6rem;
+}
+
+.recon-tagRight::after {
+    content: '';
+    position: absolute;
+    background: url('../img/tag-left.png') no-repeat;
+    background-size: contain;
+    top: 0;
+    left: -0.7rem;
+    width: 0.7rem;
+    height: 1.6rem;
 }
 
 /*内容里最复杂的tab的按钮*/
 .recon-tabBtns {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .recon-tabBtns > span {
@@ -284,7 +289,6 @@ input[type=checkbox] {
     left: 40%;
     height: 2.4rem;
     width: 0.5rem;
-    background: #2C9CFF;
     top: -0.5rem;
     transform: translateX(-50%);
 
@@ -310,11 +314,13 @@ input[type=checkbox] {
 .youScore > span {
     top: -1.4rem;
     color: #2C9CFF;
+
 }
 
 .chineseScore > span {
     bottom: -1.4rem;
     color: #666666;
+
 }
 
 /*蜂窝和轮播图板块****************/
@@ -332,6 +338,7 @@ input[type=checkbox] {
     position: relative;
     height: 20rem;
     margin: 0 auto 1rem;
+    overflow: hidden;
 }
 
 .carouselRight, .carouselLeft {
@@ -400,8 +407,8 @@ input[type=checkbox] {
 
 .honeyComb {
     position: absolute;
-    height: 4.9736rem;
-    width: 4.5rem;
+    height: 4.642rem;
+    width: 4.2rem;
     background: url("../img/honeyComb/honeyComb.png") no-repeat;
     background-size: contain;
     text-align: center;

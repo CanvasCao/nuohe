@@ -4,11 +4,21 @@ var resultAbility = Vue.extend({
         'abilityResult',
         'dataTable',
         'yourScore',
-        'chineseScore'
+        'chineseScore',
+        'tags',
     ],
 
     data: function () {
-        return {}
+        return {
+            tagPositionArray: [
+                {left: '65%', top: '0%'},
+                {left: '70%', top: '40%'},
+                {left: '65%', top: '80%'},
+                {right: '65%', top: '0%'},
+                {right: '70%', top: '40%'},
+                {right: '65%', top: '80%'},
+            ],
+        }
     },
 
 
@@ -19,7 +29,13 @@ var resultAbility = Vue.extend({
       \
       <div class="resultContent">\
         <div class="recon-title">您的基因检测结果</div>\
-        <div class="recon-cirCon"><img src="../img/xingneng.png"><div class="recon-cirTxt">{{abilityResult}}</div></div>\
+        <div class="recon-cirCon">\
+            <img src="../img/xingneng.png">\
+            <div class="recon-cirTxt">{{abilityResult}}</div>\
+            <template v-for="(item,index) in tags">\
+                <div class="recon-tag" :style="getTagStyle(index)" :class="getTagClass(index)">{{item}}</div>\
+            </template>\
+        </div>\
         <div class="recon-tabBtns"><span class="current">基因位点详情</span><span>得分详情</span></div>\
         \
          <div class="recon-tabUl">\
@@ -34,7 +50,19 @@ var resultAbility = Vue.extend({
     created: function () {
         var that = this;
     },
-    methods: {},
+    methods: {
+        getTagStyle: function (index) {
+            return this.tagPositionArray[index];
+        },
+        getTagClass: function (index) {
+            //大于2的是
+            if (index > 2) {
+                return 'recon-tagLeft';//位置在左边的箭头在右边...
+            } else {
+                return 'recon-tagRight';
+            }
+        }
+    },
     mounted: function () {
         var that = this;
 

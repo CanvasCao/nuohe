@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <title>诺禾致源</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            background: #eeeeee;
+        }
+
+        #download {
+            display: inline-block;
+            margin: 0 auto;
+
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <nuohe-header></nuohe-header>
+
+    <div id='result'>
+        <div class='resultTitle'>{{name}}</div>
+        <div class='resultSection'>
+            <div class="resultContent">
+                <template v-for="(item,index) in compositionArray">
+                    <div style='margin-bottom: 1.5rem;'>
+                        <span style='font-size:1.1rem;float: left;width: 30%'>{{item.key}}</span>
+                        <span style='font-size:1.1rem;float:right;width: 70%;color: #666666'>{{item.value}}</span>
+                        <div style='clear: both;'></div>
+                    </div>
+                </template>
+            </div>
+            <div style='text-align: center;'>
+                <div @click='download($event)' id='download' class='normalButton'>下载肌秘APP下载更多</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='../js/vue.min.js'></script>
+<script src='../js/jquery.min.js'></script>
+<script src='../js/fastclick.js'></script>
+<script src='../js/controller.js'></script>
+<script src='../js/require.min.js'></script>
+<script>
+    $(function () {
+        window.searchJson = searchJson = window.location.search.searchToJson();
+        if (!window.searchJson.id) window.location.search = 'id=3';//测试的时候加默认值...
+        FastClick.attach(document.body);
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: "红没药醇",
+                compositionArray: [],
+            },
+            methods: {
+                download: function () {
+                    var ua = navigator.userAgent.toLowerCase();
+                    if (ua.charAt('iphone') != -1 && ua.charAt('mac') != -1) {//说明不是IPHONE
+                        window.location.href = 'https://itunes.apple.com/cn/app/id1074206874?mt=8';
+                    }
+                    else {
+                        window.location.href = 'https://itunes.apple.com/us/app/id1074206874';
+                    }
+                }
+            },
+            components: {
+                'nuohe-header': function (resolve) {
+                    require(['../components/nuoheHeader.js'],
+                        function () {
+                            resolve(nuoheHeader);
+                        })
+                },
+            },
+            created: function () {
+                var that = this;
+
+                controller.direct({php: '../json/composition.json'}, function (json) {
+                    that.name = json.name;
+                    that.compositionArray = json.compositionArray;
+                });
+            },
+            mounted: function () {
+                var that = this;
+            }
+        });
+    })
+</script>
+</body>
+</html>

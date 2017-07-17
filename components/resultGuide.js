@@ -16,7 +16,7 @@ var resultGuide = Vue.extend({
             <div>产品建议</div>\
             <div class="carousel">\
                 <template v-for="(item,index) in productArray">\
-                    <div class="carouselSection">\
+                    <div class="carouselSection" @click="toJimiProduct($event,index)">\
                         <img class="carouselImg" :src="item.imgUrl">\
                         <div class="carouselDesc">{{item.desc}}</div>\
                     </div>\
@@ -38,27 +38,36 @@ var resultGuide = Vue.extend({
     created: function () {
         var that = this;
     },
-    methods: {},
+    methods: {
+        toJimiProduct: function (e, index) {
+            var that = this;
+            location.href = 'jimiProduct.html?id=' + that.productArray[index].id;
+        }
+    },
     mounted: function () {
         var that = this;
 
+        //轮播逻辑...
         var $C = $(this.$el);
         var $carouselSections = $C.find('.carouselSection');
         var len = $carouselSections.length;
         var $carouselLeft = $C.find('.carouselLeft');
         var $carouselRight = $C.find('.carouselRight');
         var index = 0;
-        $carouselLeft.click(function () {
+        $carouselSections.eq(0).css({left: '0%'}).siblings('.carouselSection').css({left: '100%'});
+        $carouselRight.click(function (e) {
+            e.stopPropagation();
             var indexNext = (index + 1) >= len ? 0 : (index + 1);
             $carouselSections.eq(index).css({left: '0%'}).stop().animate({left: '-100%'});
             $carouselSections.eq(indexNext).css({left: '100%'}).stop().animate({left: '0%'});
             index = (index + 1) >= len ? 0 : (index + 1);
         });
-        $carouselRight.click(function () {
-            var indexNext = (index - 1) < 0 ? (len-1) : (index -1);
+        $carouselLeft.click(function (e) {
+            e.stopPropagation();
+            var indexNext = (index - 1) < 0 ? (len - 1) : (index - 1);
             $carouselSections.eq(index).css({left: '0%'}).stop().animate({left: '100%'});
             $carouselSections.eq(indexNext).css({left: '-100%'}).stop().animate({left: '0%'});
-            index = (index - 1) < 0 ? (len-1) : (index -1);
+            index = (index - 1) < 0 ? (len - 1) : (index - 1);
         });
 
     },
