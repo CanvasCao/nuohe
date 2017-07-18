@@ -60,7 +60,7 @@
             <div class="resultContent" id='abilityBtns'>
                 <template v-for='(item,index) in abilityArray'>
                     <div @click='toResult($event,index)' class='abilityBtn'>
-                        <img :src='getNewSrc(index)'>{{item}}能力
+                        <img :src='getNewSrc(index)'>{{item.capability_name}}能力
                     </div>
                 </template>
             </div>
@@ -91,7 +91,7 @@
                     location.href = 'reportExplain.html';
                 },
                 toResult: function (e, i) {
-                    location.href = 'result.html?id=' + i;
+                    location.href = 'result.html?menuindex=' + i;
                 },
 
                 //过滤器...
@@ -110,19 +110,20 @@
             created: function () {
                 var that = this;
 
-
             },
             mounted: function () {
                 var that = this;
+
 
                 //init canvas...
                 loaderHelper.show();
                 require(['../js/echarts.min.js'],
                     function (echarts) {
 
-                        controller.direct({php: '../json/radar.json'}, function (json) {
+                        controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                        var php = (window.debug) ? 'radar.json' : 'radar.php';
+                        controller.directNew({php: php, params: {uid: localStorage.getItem('uid')}}, function (json) {
                             loaderHelper.hide();
-
                             var myChart = echarts.init(document.getElementById('main'));
                             var option = {
                                 tooltip: {
@@ -186,7 +187,9 @@
                     });
 
                 //init ability...
-                controller.direct({php: '../json/ability.json'}, function (json) {
+                controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                var php = (window.debug) ? 'ability.json' : 'capability.php';
+                controller.directNew({php: php}, function (json) {
                     that.abilityArray = json.data;
                 });
 

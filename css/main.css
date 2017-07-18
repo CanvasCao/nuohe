@@ -345,9 +345,13 @@ input[type=checkbox] {
     color: #2C9CFF;
     position: absolute;
     top: 5rem;
-    font-size: 2rem;
+    font-size: 2.4rem;
     box-sizing: border-box;
-    padding: 1rem;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    display: inline-block;
 }
 
 .carouselLeft {

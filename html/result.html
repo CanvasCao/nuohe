@@ -64,12 +64,12 @@
 
         <!-- 整个标题加上菜单 -->
         <div class='resultTitle'>
-            {{menuArray[abilityId]}}能力详情
+            {{menuArray[menuindex].capability_name}}详情
             <span class='menuBtn ion-navicon' @click='menuToggle'></span>
             <div class='menuListUl' v-show='ifMenuShow'>
                 <template v-for='(item,index) in menuArray'>
-                    <div @click='changeMenu($event,index)' class='menuListLi' :class="(index==abilityId)?'current':'' ">
-                        {{item}}能力
+                    <div @click='changeMenu($event,index)' class='menuListLi' :class="(index==menuindex)?'current':'' ">
+                        {{item.capability_name}}
                     </div>
                 </template>
             </div>
@@ -107,9 +107,12 @@
     </div>
 
     <div id='footerBtns'>
-        <span @click='toLeft($event)' class='toLeft' v-if='abilityId>0'><i class='ion-chevron-left'></i>{{menuArray[abilityId-1]}}能力</span>
-        <span @click='toRight($event)' class='toRight' v-if='abilityId<menuArray.length-1'>
-            {{menuArray[parseInt(abilityId)+1]}}能力<i class='ion-chevron-right'></i></span>
+        <span @click='toLeft($event)' class='toLeft' v-if='menuindex>0'>
+            <i class='ion-chevron-left'></i>{{menuArray[menuindex-1].capability_name}}
+        </span>
+        <span @click='toRight($event)' class='toRight' v-if='menuindex<menuArray.length-1'>
+            {{menuArray[parseInt(menuindex)+1].capability_name}}<i class='ion-chevron-right'></i>
+        </span>
         <div style='clear: both;'></div>
     </div>
 </div>
@@ -124,7 +127,7 @@
 <script>
     $(function () {
         window.searchJson = searchJson = window.location.search.searchToJson();
-        if (!window.searchJson.id) window.location.search = 'id=0';//默认抗敏感能力...
+        if (!window.searchJson.menuindex) window.location.search = 'menuindex=0';//默认抗敏感能力...
         FastClick.attach(document.body);
 
 
@@ -133,32 +136,64 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                abilityId: 0,
+                menuindex: null,
                 ifMenuShow: false,
-                menuArray: [],
-
+                menuArray: [
+                    {
+                        "objectId": "iGdP999U",
+                        "capability_name": "\u6297\u8870\u8001\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "HmMW000E",
+                        "capability_name": "\u9ed1\u8272\u7d20\u751f\u6210\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "zHIe999g",
+                        "capability_name": "\u62b5\u5fa1\u7c89\u523a\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "mRf2VVVA",
+                        "capability_name": "\u6297\u654f\u611f\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "cogRllls",
+                        "capability_name": "\u76ae\u80a4\u4fdd\u6e7f\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "MECz555s",
+                        "capability_name": "\u6297\u80f6\u539f\u86cb\u767d\u6d41\u5931\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "ELCV888L",
+                        "capability_name": "\u62b5\u5fa1\u598a\u5a20\u7eb9\u80fd\u529b"
+                    },
+                    {
+                        "objectId": "AwlbNNNS",
+                        "capability_name": "\u7ef4\u751f\u7d20\u5438\u6536\u4ee3\u8c22\u80fd\u529b"
+                    }
+                ],
 
                 resultAbility: [],
                 resultGuide: [],
                 resultPrinciple: [],
             },
             methods: {
-                touchstart:function(e){
+                touchstart: function (e) {
                     e.preventDefault();
                 },
                 menuToggle: function () {
                     this.ifMenuShow = !this.ifMenuShow;
                 },
                 changeMenu: function (e, index) {
-                    location.replace('result.html?id=' + index);
+                    location.replace('result.html?menuindex=' + index);
                 },
                 toLeft: function () {
                     var that = this;
-                    that.changeMenu(null, parseInt(that.abilityId) - 1);
+                    that.changeMenu(null, parseInt(that.menuindex) - 1);
                 },
                 toRight: function () {
                     var that = this;
-                    that.changeMenu(null, parseInt(that.abilityId) + 1);
+                    that.changeMenu(null, parseInt(that.menuindex) + 1);
                 },
             },
             components: {
@@ -189,17 +224,28 @@
             },
             created: function () {
                 var that = this;
+                //根据url更新全局索引... 页面之间传递用索引 请求用索引对应的objectId
+                that.menuindex = searchJson.menuindex;
 
-                //根据url更新全局索引...
-                this.abilityId = searchJson.id;
 
-                //init ability...
-                controller.direct({php: '../json/ability.json'}, function (json) {
+                // 配置文件 7种能力...
+                controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                var php = (window.debug) ? 'ability.json' : 'capability.php';
+                controller.directNew({php: php}, function (json) {
                     that.menuArray = json.data;
                 });
 
+
                 //init result...
-                controller.direct({php: '../json/result.json', params: {abilityId: searchJson.id}}, function (json) {
+                controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                var php = (window.debug) ? 'result.json' : 'result.php';
+                controller.directNew({
+                    php: php,
+                    params: {
+                        capabilityId: that.menuArray[searchJson.menuindex].objectId,
+                        uid: localStorage.getItem('uid')
+                    }
+                }, function (json) {
                     that.resultAbility = json.data.resultAbility;
                     that.resultGuide = json.data.resultGuide;
                     that.resultPrinciple = json.data.resultPrinciple;
@@ -208,6 +254,7 @@
             },
             mounted: function () {
                 var that = this;
+
             }
         });
 

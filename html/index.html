@@ -6,6 +6,7 @@
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <title>诺禾致源</title>
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/loadSimple.css">
     <style>
         #middle {
             position: absolute;
@@ -77,11 +78,24 @@
                 login: function () {
                     var that = this;
 
-                    controller.direct({php: '../json/login.json', params: {code: that.code}}, function (json) {
+                    //登陆开关...
+                    loaderHelper.show();
+                    controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                    var php = (window.debug) ? 'login.json' : 'login.php';
+                    controller.directNew({
+                        php: php,
+                        params: {code: that.code.trim()}
+                    }, function (json) {
+                        loaderHelper.hide();
                         console.log(JSON.stringify(json));
-                        localStorage.setItem('userName', json.userName);
-                        localStorage.setItem('userId', json.userId);
-                        location.href = 'welcome.html';
+                        if (json.error == '-1') alert(json.msg);
+                        else {
+                            //aabbccdd
+                            localStorage.setItem('uid', json.uid);
+                            localStorage.setItem('username', json.username);
+                            location.href = 'welcome.html';
+                        }
+//
                     });
 
                 }

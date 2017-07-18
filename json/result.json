@@ -2,7 +2,7 @@
   "data": {
     "resultAbility": [
       {
-        "abilityName": "晒黑反应",
+        "abilityName": "I.抗氧化能力",
         "abilityResult": "性能弱",
         "dataTable": [
           {
@@ -17,45 +17,45 @@
           {
             "b": false,
             "data": [
-              "IRF4",
+              "GPX1",
               "rs1001179",
-              "CC",
-              "CC"
+              "GG",
+              "GG"
             ]
           },
           {
             "b": true,
             "data": [
-              "IRF4",
+              "SOD2",
               "rs1001179",
               "CC",
-              "CC"
+              "CG"
             ]
           },
           {
             "b": false,
             "data": [
-              "IRF4",
+              "NQO1",
               "rs1001179",
-              "CC",
-              "CC"
+              "AA",
+              "AA"
             ]
           }
         ],
-        "yourScore": 66.8,
+        "yourScore": 69.7,
         "chineseScore": 80.4,
         "tags": [
-          "纹理凹凸不平",
           "皱纹",
+          "皮肤蛋白交联",
+          "皮肤弹性下降",
           "纹理凹凸不平",
-          "皱纹",
-          "纹理凹凸不平",
-          "皱纹"
+          "皮肤表皮脆弱",
+          "皮肤变薄"
         ]
       },
       {
-        "abilityName": "晒黑反应2",
-        "abilityResult": "性能强",
+        "abilityName": "II.抗糖化能力",
+        "abilityResult": "性能弱",
         "dataTable": [
           {
             "b": false,
@@ -69,31 +69,40 @@
           {
             "b": false,
             "data": [
-              "IRF4",
+              "GPX1",
               "rs1001179",
-              "CC",
-              "CC"
+              "GG",
+              "GG"
             ]
           },
           {
             "b": true,
             "data": [
-              "IRF4",
+              "SOD2",
               "rs1001179",
               "CC",
-              "CC"
+              "CG"
+            ]
+          },
+          {
+            "b": false,
+            "data": [
+              "NQO1",
+              "rs1001179",
+              "AA",
+              "AA"
             ]
           }
         ],
         "yourScore": 6.8,
         "chineseScore": 8.4,
         "tags": [
-          "纹理凹凸不平",
           "皱纹",
+          "皮肤蛋白交联",
+          "皮肤弹性下降",
           "纹理凹凸不平",
-          "皱纹",
-          "纹理凹凸不平",
-          "皱纹"
+          "皮肤表皮脆弱",
+          "皮肤变薄"
         ]
       }
     ],
@@ -102,75 +111,62 @@
         "honeyCombArray": [
           {
             "id": "aaa",
-            "name": "抗过敏抗过敏"
+            "name": "矿物油"
           },
           {
             "id": "aaa",
-            "name": "抗过敏"
+            "name": "50ML"
           },
           {
             "id": "aaa",
-            "name": "抗过敏抗过敏"
+            "name": "雅诗兰黛"
           },
           {
             "id": "aaa",
-            "name": "抗过敏"
+            "name": "保湿"
           },
           {
             "id": "aaa",
-            "name": "抗过敏抗过敏"
+            "name": "防晒"
           },
           {
             "id": "aaa",
-            "name": "抗过敏"
+            "name": "小棕瓶"
           },
           {
             "id": "aaa",
-            "name": "抗过敏抗过敏"
+            "name": "美白"
           },
           {
             "id": "aaa",
-            "name": "抗过敏"
+            "name": "兰蔻"
           },
           {
             "id": "aaa",
-            "name": "抗过敏抗过敏"
+            "name": "防腐剂"
           },
           {
             "id": "aaa",
-            "name": "抗过敏"
-          },
-          {
-            "id": "aaa",
-            "name": "抗过敏抗过敏"
-          },
-          {
-            "id": "aaa",
-            "name": "抗过敏"
+            "name": "眼部"
           }
         ],
         "productArray": [
           {
             "imgUrl": "../img/product/img.png",
-            "desc": "有舒缓镇静肌肤的作用",
+            "desc": "天然乳木果油帮助修复皮肤屏障，富含矿物离子的温泉水，有舒缓镇静肌肤的作用",
             "id": "aaa"
           },
           {
             "imgUrl": "../img/product/img.png",
-            "desc": "有舒缓镇静肌肤的作用2",
-            "id": "aaa"
-          },
-          {
-            "imgUrl": "../img/product/img.png",
-            "desc": "有舒缓镇静肌肤的作用3",
+            "desc": "天然乳木果油帮助修复皮肤屏障，富含矿物离子的温泉水，有舒缓镇静肌肤的作用",
             "id": "aaa"
           }
         ],
         "adviseOtherArray": [
           "SLS",
-          "SLS",
-          "SLS",
-          "SLS"
+          "SLES",
+          "皂基",
+          "薄荷"
         ]
       }
     ],

@@ -16,9 +16,9 @@ var honeyComb = Vue.extend({
                 {left: 4, top: 3},
                 {left: 9, top: 2},
                 {left: 3, top: 2},
-                {left: 2, top: 3},
-                {left: 11, top: 2},//10
                 {left: 1, top: 2},
+                {left: 11, top: 2},//10
+                {left: 2, top: 3},
                 {left: 10, top: 3},
             ],
         }

@@ -1,11 +1,32 @@
 {
   "data": [
-    "黑色素生成",
-    "抗衰老",
-    "抗敏感",
-    "抵御粉刺",
-    "抗胶原蛋白流失",
-    "抵御妊娠纹",
-    "维生素吸收代谢"
+    {
+      "objectId": "iGdP999U",
+      "capability_name": "\u6297\u8870\u8001\u80fd\u529b"
+    },
+    {
+      "objectId": "HmMW000E",
+      "capability_name": "\u9ed1\u8272\u7d20\u751f\u6210\u80fd\u529b"
+    },
+    {
+      "objectId": "zHIe999g",
+      "capability_name": "\u62b5\u5fa1\u7c89\u523a\u80fd\u529b"
+    },
+    {
+      "objectId": "mRf2VVVA",
+      "capability_name": "\u6297\u654f\u611f\u80fd\u529b"
+    },
+    {
+      "objectId": "MECz555s",
+      "capability_name": "\u6297\u80f6\u539f\u86cb\u767d\u6d41\u5931\u80fd\u529b"
+    },
+    {
+      "objectId": "ELCV888L",
+      "capability_name": "\u62b5\u5fa1\u598a\u5a20\u7eb9\u80fd\u529b"
+    },
+    {
+      "objectId": "AwlbNNNS",
+      "capability_name": "\u7ef4\u751f\u7d20\u5438\u6536\u4ee3\u8c22\u80fd\u529b"
+    }
   ]
 }

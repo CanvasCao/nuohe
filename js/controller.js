@@ -13,11 +13,11 @@
 })()
 
 
-//ajax封装json jsonp...
+//ajax封装json jsonp 本地json用direct 服务端jsonp用directp...
 ;
 (function (w, d, $, undefined) {
-    var debug = true;
-    var jimiHost = (debug) ? '' : 'http://ws.jimi.la/wangshi/wangshi/web/';
+    window.debug = true;
+    var jimiHost = 'http://n1.jimi.la/Novogene/';
     var controller = {};
     controller.index = 10000;
     controller.directp = function (json, cb, cbError) {
@@ -29,24 +29,7 @@
             dataType: "jsonp",
             jsonp: "jsonpcallback",
             jsonpCallback: jsonpCallback,
-            success: function (data) {
-                if (typeof data == 'string') {
-                    data = JSON.parse(data);
-                }
-                cb(data);
-            },
-            error: function (err) {
-                // console.log('ERROR!');
-                // console.log(JSON.stringify(err));
-                // cbError(err);
-            }
-        });
-    };
-    controller.direct = function (json, cb, cbError) {
-        $.ajax({
-            type: "get",
-            url: jimiHost + json.php,
-            data: json.params || {},
+            // timeout: 5000,
             success: function (data) {
                 if (typeof data == 'string') {
                     data = JSON.parse(data);
@@ -56,6 +39,24 @@
             error: function (err) {
                 console.log('ERROR!');
                 console.log(JSON.stringify(err));
+                // cbError(err);
+            }
+        });
+    };
+    controller.direct = function (json, cb, cbError) {
+        $.ajax({
+            type: "get",
+            url: '../json/' + json.php,
+            data: json.params || {},
+            success: function (data) {
+                if (typeof data == 'string') {
+                    data = JSON.parse(data);
+                }
+                cb(data);
+            },
+            error: function (err) {
+                // console.log('ERROR!');
+                // console.log(JSON.stringify(err));
                 // cbError(err);
             }
         });
