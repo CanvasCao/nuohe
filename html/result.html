@@ -14,22 +14,23 @@
         }
 
         .menuBtn {
-            position: absolute;
+            position: fixed;
             right: 1rem;
-            top: 50%;
+            top: 1.7rem;
             transform: translateY(-50%);
             font-size: 2.2rem;
             line-height: 2rem;
             height: 2rem;
             width: 2rem;
             display: inline-block;
+            z-index: 200;
         }
 
         .menuListUl {
-            position: absolute;
+            position: fixed;
             border: 1px solid #000;
             right: 1rem;
-            top: 5rem;
+            top: 3.5rem;
             box-sizing: border-box;
             padding: 1rem;
             background: rgba(0, 0, 0, 0.7);
@@ -40,6 +41,7 @@
         .menuListLi {
             color: white;
             line-height: 3rem;
+            text-align: center;
         }
 
         .menuListLi.current {
@@ -51,28 +53,29 @@
             height: 100%;
             width: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 199;
+            z-index: 200;
             opacity: 0.5;
         }
+
     </style>
 <body>
 
 <div id='app'>
     <nuohe-header></nuohe-header>
     <div id='mask' @click='menuToggle' @touchmove='touchstart($event)' v-show='ifMenuShow'></div>
-    <div id='result'>
+    <span class='menuBtn ion-navicon' @click='menuToggle'></span>
+    <div class='menuListUl' v-show='ifMenuShow'>
+        <template v-for='(item,index) in menuArray'>
+            <div @click='changeMenu($event,index)' class='menuListLi' :class="(index==menuindex)?'current':'' ">
+                {{item.capability_name}}
+            </div>
+        </template>
+    </div>
 
+    <div id='result'>
         <!-- 整个标题加上菜单 -->
         <div class='resultTitle'>
             {{menuArray[menuindex].capability_name}}详情
-            <span class='menuBtn ion-navicon' @click='menuToggle'></span>
-            <div class='menuListUl' v-show='ifMenuShow'>
-                <template v-for='(item,index) in menuArray'>
-                    <div @click='changeMenu($event,index)' class='menuListLi' :class="(index==menuindex)?'current':'' ">
-                        {{item.capability_name}}
-                    </div>
-                </template>
-            </div>
         </div>
 
         <!-- dataTable和peityCircle 的components -->
@@ -239,6 +242,7 @@
                 //init result...
                 controller.directNew = (window.debug) ? controller.direct : controller.directp;
                 var php = (window.debug) ? 'result.json' : 'result.php';
+                loaderHelper.show();
                 controller.directNew({
                     php: php,
                     params: {
@@ -246,6 +250,7 @@
                         uid: localStorage.getItem('uid')
                     }
                 }, function (json) {
+                    loaderHelper.hide();
                     that.resultAbility = json.data.resultAbility;
                     that.resultGuide = json.data.resultGuide;
                     that.resultPrinciple = json.data.resultPrinciple;

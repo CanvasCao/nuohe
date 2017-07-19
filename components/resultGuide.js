@@ -16,8 +16,8 @@ var resultGuide = Vue.extend({
             <div>产品建议</div>\
             <div class="carousel">\
                 <template v-for="(item,index) in productArray">\
-                    <div class="carouselSection" @click="toJimiProduct($event,index)">\
-                        <img class="carouselImg" :src="item.imgUrl">\
+                    <div class="carouselSection">\
+                        <img class="carouselImg" @click="toJimiProduct($event,index)" :src="item.imgUrl">\
                         <div class="carouselDesc">{{item.desc}}</div>\
                     </div>\
                 </template>\

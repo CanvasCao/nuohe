@@ -60,7 +60,7 @@
             <div class="resultContent" id='abilityBtns'>
                 <template v-for='(item,index) in abilityArray'>
                     <div @click='toResult($event,index)' class='abilityBtn'>
-                        <img :src='getNewSrc(index)'>{{item.capability_name}}能力
+                        <img :src='getNewSrc(index)'>{{item.capability_name}}
                     </div>
                 </template>
             </div>
@@ -116,71 +116,75 @@
 
 
                 //init canvas...
-                loaderHelper.show();
+                loaderHelper.show({text: '报告计算中,请耐心等待。'});
                 require(['../js/echarts.min.js'],
                     function (echarts) {
 
                         controller.directNew = (window.debug) ? controller.direct : controller.directp;
                         var php = (window.debug) ? 'radar.json' : 'radar.php';
                         controller.directNew({php: php, params: {uid: localStorage.getItem('uid')}}, function (json) {
-                            loaderHelper.hide();
-                            var myChart = echarts.init(document.getElementById('main'));
-                            var option = {
-                                tooltip: {
-                                    position: ['40%', '40%'],
-                                },
-                                legend: {
-                                    data: ['您的基因性能水平', '中国人均水平'],
-                                    left: '2%',
-                                    top: '2%'
-                                },
-                                radar: {
-//                shape: 'circle',
-                                    radius: '70%',
-                                    indicator: json.nameArray.map(function (e) {
-                                        return {name: e, max: 100};
-                                    }),
-                                    center: ['50%', '55%'],
-                                    name: {
-                                        show: true,
-                                        formatter: function (value, indicator) {
-                                            return value;
-                                        },
-                                        textStyle: {
-                                            color: '#333',
-                                            fontStyle: 'normal',
-                                            // fontWeight: normal,
-                                            fontFamily: 'sans-serif',
-                                            // fontSize: 24,
-                                            'text-align': 'center'
-                                        },
-                                    },
-                                    startAngle: 90,
-                                    nameGap: 00,
 
-                                },
-                                series: [{
-                                    name: '预算 vs 开销（Budget vs spending）',
-                                    type: 'radar',
-                                    data: [
-                                        {
-                                            value: json.yourGene,
-                                            name: '您的基因性能水平'
-                                        },
-                                        {
-                                            value: json.chineseGene,
-                                            name: '中国人均水平'
-                                        }
-                                    ],
-                                    areaStyle: {
-                                        normal: {
-                                            opacity: 0.2,
-                                        }
+                            setTimeout(function () {
+                                loaderHelper.hide();
+                                var myChart = echarts.init(document.getElementById('main'));
+                                var option = {
+                                    tooltip: {
+                                        position: ['40%', '40%'],
                                     },
-                                }],
-                                color: ['#ff3c00', '#00bdff']
-                            };
-                            myChart.setOption(option);
+                                    legend: {
+                                        data: ['您的基因性能水平', '中国人均水平'],
+                                        left: '2%',
+                                        top: '2%'
+                                    },
+                                    radar: {
+//                shape: 'circle',
+                                        radius: '70%',
+                                        indicator: json.nameArray.map(function (e) {
+                                            return {name: e, max: 100};
+                                        }),
+                                        center: ['50%', '55%'],
+                                        name: {
+                                            show: true,
+                                            formatter: function (value, indicator) {
+                                                return value.replace('能力', '');
+                                            },
+                                            textStyle: {
+                                                color: '#333',
+                                                fontStyle: 'normal',
+                                                // fontWeight: normal,
+                                                fontFamily: 'sans-serif',
+                                                // fontSize: 24,
+                                                'text-align': 'center'
+                                            },
+                                        },
+                                        startAngle: (90 - 3 * 36),
+                                        nameGap: 00,
+
+                                    },
+                                    series: [{
+                                        name: '预算 vs 开销（Budget vs spending）',
+                                        type: 'radar',
+                                        data: [
+                                            {
+                                                value: json.yourGene,
+                                                name: '您的基因性能水平'
+                                            },
+                                            {
+                                                value: json.chineseGene,
+                                                name: '中国人均水平'
+                                            }
+                                        ],
+                                        areaStyle: {
+                                            normal: {
+                                                opacity: 0.2,
+                                            }
+                                        },
+                                    }],
+                                    color: ['#ff3c00', '#00bdff']
+                                };
+                                myChart.setOption(option);
+                            }, 2000)
+
                         })
 
 

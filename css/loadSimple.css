@@ -15,21 +15,27 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    width: 300px;
-    height: 150px;
+    width: 70%;
     box-sizing: border-box;
-    padding: 50px 0;
-    background: #ccc;
+    padding: 3rem 0;
+    background: #ffffff;
     border-radius: 1rem;
+    border: 1px solid #cccccc;
+}
+
+#loaderText {
+    text-align: center;
+    font-size: 1.0rem;
+    color: #2C9CFF;
 }
 
 .ball-clip-rotate > div {
     border-radius: 100%;
-    margin: 2px;
-    border: 2px solid #fff;
+    margin-bottom: 1rem;
+    border: 2px solid #2C9CFF;
     border-bottom-color: transparent;
-    height: 26px;
-    width: 26px;
+    height: 2rem;
+    width: 2rem;
     background: 0 0 !important;
     display: inline-block;
     -webkit-animation: rotate .75s 0s linear infinite;

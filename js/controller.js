@@ -83,8 +83,9 @@
 
                 '<div id="loaderMiddle">' +
 
-                '<div class="ball-clip-rotate"><div></div></div>' +
-                '<div style="text-align: center;font-size: 1.0rem;color: white;" id="loaderText"></div>' +
+                // '<div class="ball-clip-rotate"><div></div></div>' +
+                '<img style="height: 6rem;margin-bottom: 1rem;" src="../img/bottle.gif">' +
+                '<div id="loaderText"></div>' +
 
                 '</div>' +
                 '</div>'
@@ -92,13 +93,16 @@
 
             that.$container = $('#loader');
             that.$text = that.$container.find('#loaderText');
-
         },
         initCSS: function () {
             var that = this;
         },
         bindEvent: function () {
             var that = this;
+            that.$container[0].addEventListener('touchstart', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }, false)
         },
         show: function (json) {
             var that = this;

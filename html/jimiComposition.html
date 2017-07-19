@@ -61,11 +61,11 @@
             methods: {
                 download: function () {
                     var ua = navigator.userAgent.toLowerCase();
-                    if (ua.charAt('iphone') != -1 && ua.charAt('mac') != -1) {//说明不是IPHONE
-                        window.location.href = 'https://itunes.apple.com/cn/app/id1074206874?mt=8';
+                    if (ua.indexOf('iphone') == -1 && ua.indexOf('mac') == -1) {//说明不是IPHONE
+                        window.location.href = ' http://a.app.qq.com/o/simple.jsp?pkgname=com.jimi.skinsecret#opened';
                     }
                     else {
-                        window.location.href = 'https://itunes.apple.com/us/app/id1074206874';
+                        window.location.href = 'https://itunes.apple.com/cn/app/id1074206874?mt=8';
                     }
                 }
             },
