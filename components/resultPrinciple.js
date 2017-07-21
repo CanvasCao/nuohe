@@ -65,7 +65,9 @@ var resultPrinciple = Vue.extend({
             setTimeout(function () {
                 that.ifMaskShow = true;
                 that.currentImgUrl = e.target.src;
-                $(that.$refs.maskimg).css({width: '80%'}).animate({width: '100%'});
+                $(that.$refs.maskimg).css({width: '80%'})
+                    .css({transform: 'translateX(-50%) translateY(-50%) translate3d(0px, 0px, 0px)'})
+                    .animate({width: '100%'});
             }, 400)
         },
 

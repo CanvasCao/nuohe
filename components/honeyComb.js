@@ -43,13 +43,15 @@ var honeyComb = Vue.extend({
         sliceStr: function (name) {
             if (name.length > 6) return name.slice(0, 6) + '...'
             else return name
-        }
-        ,
+        },
         toJimiComposition: function (e, index) {
             var that = this;
-            location.href = 'jimiComposition.html?id=' + that.honeyCombArray[index].id;
-        }
-        ,
+            location.href = 'jimiComposition.html?' + jsonToSearch({
+                    id: that.honeyCombArray[index].id,
+                    uid: searchJson.uid,
+                    username: searchJson.username
+                });
+        },
         honeyCombStyle: function (index) {
             var that = this;
 

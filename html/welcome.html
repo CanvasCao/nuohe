@@ -63,10 +63,10 @@
     </div>
     <div id='welBottom'></div>
     <div @click='check' id='check' class='normalButton'>点击查看报告</div>
-
 </div>
 
-
+<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
+<script src='../js/share.js'></script>
 <script src='../js/vue.min.js'></script>
 <script src='../js/jquery.min.js'></script>
 <script src='../js/fastclick.js'></script>
@@ -75,6 +75,7 @@
 
 <script>
     $(function () {
+        window.searchJson = searchJson = window.location.search.searchToJson();
         FastClick.attach(document.body);
 
         var vm = new Vue({
@@ -84,7 +85,7 @@
             },
             methods: {
                 check: function () {
-                    location.href = 'report.html';
+                    location.href = 'report.html?' + jsonToSearch({uid: searchJson.uid, username: searchJson.username});
                 }
             },
             components: {
@@ -97,7 +98,7 @@
             },
             created: function () {
                 var that = this;
-                this.userName = localStorage.getItem('username');
+                this.userName = searchJson.username;
             },
             mounted: function () {
                 var that = this;

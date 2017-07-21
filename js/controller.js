@@ -12,12 +12,11 @@
         })
 })()
 
-
 //ajax封装json jsonp 本地json用direct 服务端jsonp用directp...
 ;
 (function (w, d, $, undefined) {
     window.debug = true;
-    var jimiHost = 'http://n1.jimi.la/Novogene/';
+    window.jimiHost = 'http://n1.jimi.la/Novogene/';
     var controller = {};
     controller.index = 10000;
     controller.directp = function (json, cb, cbError) {
@@ -129,15 +128,6 @@
 
     window.loaderHelper = loaderHelper;
 })(window, document, $);
-
-//globalManager 全局...
-;
-(function (w, d, $, undefined) {
-    var globalManager = {};
-    var GM = globalManager;
-    w.GM = w.globalManager = globalManager;
-})(window, document, $);
-
 
 //封装$_GET
 ;

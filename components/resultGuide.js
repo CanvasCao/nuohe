@@ -41,7 +41,11 @@ var resultGuide = Vue.extend({
     methods: {
         toJimiProduct: function (e, index) {
             var that = this;
-            location.href = 'jimiProduct.html?id=' + that.productArray[index].id;
+            location.href = 'jimiProduct.html?' + jsonToSearch({
+                    id: that.productArray[index].id,
+                    uid: searchJson.uid,
+                    username: searchJson.username,
+                });
         }
     },
     mounted: function () {

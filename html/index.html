@@ -58,15 +58,17 @@
     </div>
 </div>
 
+<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
+<script src='../js/share.js'></script>
 <script src='../js/vue.min.js'></script>
 <script src='../js/jquery.min.js'></script>
 <script src='../js/fastclick.js'></script>
 <script src='../js/controller.js'></script>
 <script src='../js/require.min.js'></script>
+
 <script>
     $(function () {
-//        window.searchJson = searchJson = window.location.search.searchToJson();
-//        if (!window.searchJson.id) window.location.search = 'id=3';//测试的时候加默认值...
+        window.searchJson = searchJson = window.location.search.searchToJson();
         FastClick.attach(document.body);
 
         var vm = new Vue({
@@ -90,12 +92,9 @@
                         console.log(JSON.stringify(json));
                         if (json.error == '-1') alert(json.msg);
                         else {
-                            //aabbccdd
-                            localStorage.setItem('uid', json.uid);
-                            localStorage.setItem('username', json.username);
-                            location.href = 'welcome.html';
+                            //aabbccdd...
+                            location.href = 'welcome.html?' + jsonToSearch({uid: json.uid, username: json.username});
                         }
-//
                     });
 
                 }

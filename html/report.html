@@ -71,7 +71,8 @@
 
 </div>
 
-
+<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
+<script src='../js/share.js'></script>
 <script src='../js/vue.min.js'></script>
 <script src='../js/jquery.min.js'></script>
 <script src='../js/fastclick.js'></script>
@@ -79,6 +80,7 @@
 <script src='../js/controller.js'></script>
 <script>
     $(function () {
+        window.searchJson = searchJson = window.location.search.searchToJson();
         FastClick.attach(document.body);
 
         var vm = new Vue({
@@ -88,10 +90,17 @@
             },
             methods: {
                 toReportExplain: function () {
-                    location.href = 'reportExplain.html';
+                    location.href = 'reportExplain.html?' + jsonToSearch({
+                            uid: searchJson.uid,
+                            username: searchJson.username
+                        });
                 },
                 toResult: function (e, i) {
-                    location.href = 'result.html?menuindex=' + i;
+                    location.href = 'result.html?' + jsonToSearch({
+                            menuindex: i,
+                            uid: searchJson.uid,
+                            username: searchJson.username
+                        });
                 },
 
                 //过滤器...
@@ -122,8 +131,7 @@
 
                         controller.directNew = (window.debug) ? controller.direct : controller.directp;
                         var php = (window.debug) ? 'radar.json' : 'radar.php';
-                        controller.directNew({php: php, params: {uid: localStorage.getItem('uid')}}, function (json) {
-
+                        controller.directNew({php: php, params: {uid: searchJson.uid}}, function (json) {
                             setTimeout(function () {
                                 loaderHelper.hide();
                                 var myChart = echarts.init(document.getElementById('main'));
