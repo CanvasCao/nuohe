@@ -20,11 +20,11 @@ onload = function () {
             if (searchJson.uid && searchJson.username) {
                 var title = '诺禾致源';
                 var desc = searchJson.username+ '女士美肤基因检测报告';
-                var link = location.hostname + '/apps_T1/nuoheWX/html/welcome.html?' + jsonToSearch({
+                var link = location.hostname + '/apps_T1/nuohe/html/welcome.html?' + jsonToSearch({
                         uid: searchJson.uid,
                         username: searchJson.username,
                     });
-                var imgUrl = location.hostname + '/apps_T1/nuoheWX/img/jimi/logo.jpg';
+                var imgUrl = location.hostname + '/apps_T1/nuohe/img/jimi/logo.jpg';
 
 
                 wx.onMenuShareAppMessage({

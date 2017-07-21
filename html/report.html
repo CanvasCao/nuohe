@@ -7,6 +7,7 @@
     <title>诺禾致源</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/loadSimple.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
     <style>
         body {
             background: #eeeeee;
@@ -33,7 +34,7 @@
 
         #explain {
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 1.5rem;
             width: 50%;
         }
     </style>
@@ -67,6 +68,15 @@
         </div>
 
         <div @click='toReportExplain' id='explain' class='normalButton'>报告阅读说明</div>
+        <div style='text-align: center;'>
+            <span @click='showShareMask($event)' class='specButton'>分享</span>
+            <span @click='showShareMask($event)' class='specButton'>收藏</span>
+        </div>
+
+        <div ref='shareMask' @click='hideShareMask($event)'
+             style='display:none;z-index:10000;position: fixed;width: 100%;height: 100%;top:0;left:0;background: rgba(0,0,0,0.3);'>
+            <i class='airplane ion-paper-airplane' style='position: absolute;font-size: 3rem;color: white;'></i>
+        </div>
     </div>
 
 </div>
@@ -83,12 +93,25 @@
         window.searchJson = searchJson = window.location.search.searchToJson();
         FastClick.attach(document.body);
 
+        window.BUS = new Vue({});
         var vm = new Vue({
             el: '#app',
             data: {
-                abilityArray: []
+                abilityArray: [],
+                ifShareMaskShow: false,
             },
             methods: {
+                showShareMask: function () {
+                    var that = this;
+                    $(that.$refs.shareMask).fadeIn().find('.airplane').css({
+                        top: '2rem',
+                        right: '2rem'
+                    }).animate({top: '1rem', right: '1rem'})
+                },
+                hideShareMask: function () {
+                    var that = this;
+                    $(that.$refs.shareMask).fadeOut();
+                },
                 toReportExplain: function () {
                     location.href = 'reportExplain.html?' + jsonToSearch({
                             uid: searchJson.uid,
@@ -118,6 +141,7 @@
             },
             created: function () {
                 var that = this;
+
 
             },
             mounted: function () {

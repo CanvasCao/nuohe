@@ -81,7 +81,9 @@
             created: function () {
                 var that = this;
 
-                controller.direct({php: '../json/composition.json'}, function (json) {
+                controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                var php = (window.debug) ? 'composition.json' : 'formula.php';
+                controller.directNew({php: php,params:{iid:searchJson.id}}, function (json) {
                     that.name = json.name;
                     that.compositionArray = json.compositionArray;
                 });

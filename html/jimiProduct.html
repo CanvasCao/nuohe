@@ -98,7 +98,10 @@
             created: function () {
                 var that = this;
 
-                controller.direct({php: '../json/product.json'}, function (json) {
+
+                controller.directNew = (window.debug) ? controller.direct : controller.directp;
+                var php = (window.debug) ? 'product.json' : 'product.php';
+                controller.directNew({php: php, params: {pid: searchJson.id}}, function (json) {
                     that.title = json.title;
                     that.pic = json.pic;
                     that.specification = json.specification;

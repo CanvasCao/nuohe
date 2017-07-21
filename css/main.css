@@ -46,6 +46,17 @@ input[type=checkbox] {
 
 }
 
+.specButton{
+    background: #009688;
+    color: #242424;
+    text-align: center;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    box-sizing: border-box;
+    padding: 0.6rem 2rem;
+    display: inline-block;
+}
+
 .spec {
     color: #2C9CFF;
 }
