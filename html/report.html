@@ -114,14 +114,14 @@
                 },
                 toReportExplain: function () {
                     location.href = 'reportExplain.html?' + jsonToSearch({
-                            uid: searchJson.uid,
+                            orderid: searchJson.orderid,
                             username: searchJson.username
                         });
                 },
                 toResult: function (e, i) {
                     location.href = 'result.html?' + jsonToSearch({
                             menuindex: i,
-                            uid: searchJson.uid,
+                            orderid: searchJson.orderid,
                             username: searchJson.username
                         });
                 },
@@ -155,7 +155,7 @@
 
                         controller.directNew = (window.debug) ? controller.direct : controller.directp;
                         var php = (window.debug) ? 'radar.json' : 'radar.php';
-                        controller.directNew({php: php, params: {uid: searchJson.uid}}, function (json) {
+                        controller.directNew({php: php, params: {orderid: searchJson.orderid}}, function (json) {
                             setTimeout(function () {
                                 loaderHelper.hide();
                                 var myChart = echarts.init(document.getElementById('main'));
@@ -215,7 +215,7 @@
                                     color: ['#ff3c00', '#00bdff']
                                 };
                                 myChart.setOption(option);
-                            }, 2000)
+                            }, 1000)
 
                         })
 

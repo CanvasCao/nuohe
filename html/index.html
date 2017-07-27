@@ -92,8 +92,8 @@
                         console.log(JSON.stringify(json));
                         if (json.error == '-1') alert(json.msg);
                         else {
-                            //aabbccdd...
-                            location.href = 'welcome.html?' + jsonToSearch({uid: json.uid, username: json.username});
+                            //bH6K...
+                            location.href = 'welcome.html?' + jsonToSearch({orderid: json.orderid, username: json.username});
                         }
                     });
 

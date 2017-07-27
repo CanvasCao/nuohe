@@ -25,7 +25,7 @@ var resultAbility = Vue.extend({
     template: '\
      <div class="resultSection">\
      \
-      <div class="resultHeader">{{abilityName}}</div>\
+      <div class="resultHeader" @click="toggleSilde">{{abilityName}}</div>\
       \
       <div class="resultContent">\
         <div class="recon-title">您的基因检测结果</div>\
@@ -51,6 +51,10 @@ var resultAbility = Vue.extend({
         var that = this;
     },
     methods: {
+        toggleSilde: function () {
+            var that = this;
+            $(that.$el).find('.resultContent').slideToggle();
+        },
         getTagStyle: function (index) {
             return this.tagPositionArray[index];
         },

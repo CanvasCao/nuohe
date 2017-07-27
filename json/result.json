@@ -114,7 +114,6 @@
             "name": "矿物油"
           },
           {
-            "id": "aaa",
             "name": "50ML"
           },
           {
@@ -122,11 +121,9 @@
             "name": "雅诗兰黛"
           },
           {
-            "id": "aaa",
             "name": "保湿"
           },
           {
-            "id": "aaa",
             "name": "防晒"
           },
           {
@@ -146,7 +143,6 @@
             "name": "防腐剂"
           },
           {
-            "id": "aaa",
             "name": "眼部"
           }
         ],
@@ -170,6 +166,11 @@
         ]
       }
     ],
+    "resultVitamin": [
+      {
+        "imgUrl": "../img/vitamin.jpg"
+      }
+    ],
     "resultPrinciple": [
       {
         "pArray": [
@@ -182,6 +183,11 @@
             "imgUrl": "../img/jili/jili2.png"
           }
         ]
+      }
+    ],
+    "resultDocumentation": [
+      {
+        "documentHtml": "<div>文献</div><br><div>文献</div><br>"
       }
     ]
   }

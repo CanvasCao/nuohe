@@ -19,7 +19,7 @@ var resultPrinciple = Vue.extend({
 
     template: "\
     <div class='resultSection'>\
-        <div class='resultHeader'>机理</div>\
+        <div class='resultHeader'  @click='toggleSilde'>机理</div>\
         <div class='resultContent'>\
             <template v-for='(item,index) in pArray'>\
                 <div style='margin: 1.5rem 0 1.5rem;font-size: 1rem;'>{{item.desc}}</div>\
@@ -39,6 +39,10 @@ var resultPrinciple = Vue.extend({
         var that = this;
     },
     methods: {
+        toggleSilde: function () {
+            var that = this;
+            $(that.$el).find('.resultContent').slideToggle();
+        },
         touchstart: function (e) {
             var that = this;
             if (that.zoom == 2) {

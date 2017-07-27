@@ -8,7 +8,7 @@ var resultGuide = Vue.extend({
 
     template: '\
     <div class="resultSection">\
-        <div class="resultHeader">美肤指导</div>\
+        <div class="resultHeader"  @click="toggleSilde">美肤指导</div>\
         <div class="resultContent">\
             <div class="resultTitleBg">护肤建议</div>\
             <div>优选成分</div>\
@@ -18,7 +18,6 @@ var resultGuide = Vue.extend({
                 <template v-for="(item,index) in productArray">\
                     <div class="carouselSection">\
                         <img class="carouselImg" @click="toJimiProduct($event,index)" :src="item.imgUrl">\
-                        <div class="carouselDesc">{{item.desc}}</div>\
                     </div>\
                 </template>\
                 <i v-show="productArray.length>1" class="carouselLeft ion-arrow-left-b"></i>\
@@ -39,11 +38,15 @@ var resultGuide = Vue.extend({
         var that = this;
     },
     methods: {
+        toggleSilde: function () {
+            var that = this;
+            $(that.$el).find('.resultContent').slideToggle();
+        },
         toJimiProduct: function (e, index) {
             var that = this;
             location.href = 'jimiProduct.html?' + jsonToSearch({
                     id: that.productArray[index].id,
-                    uid: searchJson.uid,
+                    orderid: searchJson.orderid,
                     username: searchJson.username,
                 });
         }

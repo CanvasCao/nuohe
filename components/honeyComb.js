@@ -27,13 +27,13 @@ var honeyComb = Vue.extend({
 
     template: '\
      <div class="honeyContainer">\
-          <transition-group name="list-complete">\
+        <transition-group name="list-complete">\
             <template v-for="(item,index) in honeyCombArray">\
             <div @click="toJimiComposition($event,index)" :style="honeyCombStyle(index)" v-bind:key="item" class="honeyComb list-complete-item"  :class="honeyCombClassName(index)">\
                 <span class="honeyTxt">{{sliceStr(item.name)}}</span>\
             </div>\
             </template>\
-          </transition-group>\
+        </transition-group>\
     </div>',
 
     created: function () {
@@ -41,14 +41,16 @@ var honeyComb = Vue.extend({
     },
     methods: {
         sliceStr: function (name) {
-            if (name.length > 6) return name.slice(0, 6) + '...'
+            if (name.length > 5) return name.slice(0, 5) + '..'
             else return name
         },
         toJimiComposition: function (e, index) {
             var that = this;
+            if (!that.honeyCombArray[index].id)return;
+
             location.href = 'jimiComposition.html?' + jsonToSearch({
                     id: that.honeyCombArray[index].id,
-                    uid: searchJson.uid,
+                    orderid: searchJson.orderid,
                     username: searchJson.username
                 });
         },
@@ -61,11 +63,17 @@ var honeyComb = Vue.extend({
                 transition: "all " + index / 10 + "s ease"
             };
             return json;
-
         }
         ,
         honeyCombClassName: function (index) {
-            var res = (index % 2 != 0) ? "alter" : "";//alter
+            var that = this;
+            // var res = (index % 2 != 0) ? "alter" : "";//alter
+            var res = '';
+            if (!that.honeyCombArray[index].id) {
+                res = 'alter';
+            }
+            ;
+
             return res;
         }
     },

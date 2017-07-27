@@ -97,9 +97,15 @@
                       :key="index"
                       :honey-comb-array="item.honeyCombArray"
                       :product-array="item.productArray"
-                      :advise-other-array="item.adviseOtherArray"
-        >
+                      :advise-other-array="item.adviseOtherArray">
         </result-guide>
+
+        <result-vitamin
+                v-for='(item,index) in resultVitamin'
+                :index="index"
+                :key="index"
+                :img-url="item.imgUrl">
+        </result-vitamin>
 
         <!-- 机理 -->
         <result-principle v-for='(item,index) in resultPrinciple'
@@ -107,6 +113,12 @@
                           :key="index"
                           :p-array="item.pArray">
         </result-principle>
+
+        <result-documentation v-for='(item,index) in resultDocumentation'
+                              :index="index"
+                              :key="index"
+                              :document-html="item.documentHtml">
+        </result-documentation>
     </div>
 
     <div id='footerBtns'>
@@ -160,10 +172,6 @@
                         "capability_name": "\u6297\u654f\u611f\u80fd\u529b"
                     },
                     {
-                        "objectId": "cogRllls",
-                        "capability_name": "\u76ae\u80a4\u4fdd\u6e7f\u80fd\u529b"
-                    },
-                    {
                         "objectId": "MECz555s",
                         "capability_name": "\u6297\u80f6\u539f\u86cb\u767d\u6d41\u5931\u80fd\u529b"
                     },
@@ -179,7 +187,9 @@
 
                 resultAbility: [],
                 resultGuide: [],
+                resultVitamin: [],
                 resultPrinciple: [],
+                resultDocumentation: [],
             },
             methods: {
                 touchstart: function (e) {
@@ -191,7 +201,7 @@
                 changeMenu: function (e, index) {
                     location.replace('result.html?' + jsonToSearch({
                             menuindex: index,
-                            uid: searchJson.uid,
+                            orderid: searchJson.orderid,
                             username: searchJson.username,
                         }));
                 },
@@ -212,21 +222,33 @@
                         })
                 },
                 'result-ability': function (resolve) {
-                    require(['../components/resultAbility.js'],
+                    require(['../components/resultAbility.js?_=' + new Date().getTime()],
                         function () {
                             resolve(resultAbility);
                         })
                 },
                 'result-guide': function (resolve) {
-                    require(['../components/resultGuide.js'],
+                    require(['../components/resultGuide.js?_=' + new Date().getTime()],
                         function () {
                             resolve(resultGuide);
                         })
                 },
+                'result-vitamin': function (resolve) {
+                    require(['../components/resultVitamin.js?_=' + new Date().getTime()],
+                        function () {
+                            resolve(resultVitamin);
+                        })
+                },
                 'result-principle': function (resolve) {
-                    require(['../components/resultPrinciple.js'],
+                    require(['../components/resultPrinciple.js?_=' + new Date().getTime()],
                         function () {
                             resolve(resultPrinciple);
+                        })
+                },
+                'result-documentation': function (resolve) {
+                    require(['../components/resultDocumentation.js?_=' + new Date().getTime()],
+                        function () {
+                            resolve(resultDocumentation);
                         })
                 },
             },
@@ -252,13 +274,15 @@
                     php: php,
                     params: {
                         capabilityId: that.menuArray[searchJson.menuindex].objectId,
-                        uid: searchJson.uid,
+                        orderid: searchJson.orderid,
                     }
                 }, function (json) {
                     loaderHelper.hide();
                     that.resultAbility = json.data.resultAbility;
                     that.resultGuide = json.data.resultGuide;
+                    that.resultVitamin = json.data.resultVitamin;
                     that.resultPrinciple = json.data.resultPrinciple;
+                    that.resultDocumentation = json.data.resultDocumentation;
                 });
 
             },

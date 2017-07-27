@@ -10,9 +10,9 @@
     -webkit-highlight: none;
     -webkit-text-size-adjust: none;
 
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    /*-webkit-user-select: none;*/
+    /*-ms-user-select: none;*/
+    /*user-select: none;*/
     font-size: 1.2rem;
 }
 
@@ -47,8 +47,8 @@ input[type=checkbox] {
 }
 
 .specButton{
-    background: #009688;
-    color: #242424;
+    background: #3285FE;
+    color:white;
     text-align: center;
     border-radius: 0.4rem;
     font-size: 0.8rem;
@@ -98,7 +98,6 @@ input[type=checkbox] {
     background: white;
     margin: 0 0.5rem 2rem;
     box-sizing: border-box;
-    padding-bottom: 2rem;
     /*display: none;*/
 }
 
@@ -124,7 +123,7 @@ input[type=checkbox] {
 
 .resultContent {
     box-sizing: border-box;
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem 1.5rem 3.5rem;
 }
 
 /*内容内部******/
@@ -347,7 +346,7 @@ input[type=checkbox] {
 
 .carousel {
     position: relative;
-    height: 20rem;
+    height: 14rem;
     margin: 0 auto 1rem;
     overflow: hidden;
 }
@@ -387,11 +386,6 @@ input[type=checkbox] {
     height: 12rem;
     display: block;
     margin: 0 auto 2rem;
-}
-
-.carouselSection .carouselDesc {
-    height: 6rem;
-    font-size: 1rem;
 }
 
 .adviseOther {
@@ -447,6 +441,10 @@ input[type=checkbox] {
 
 .honeyComb.alter .honeyTxt {
     color: white;
+}
+
+.honeyComb.disable{
+    opacity: 0.4;
 }
 
 /*vue 渐变************************************/

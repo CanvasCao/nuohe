@@ -52,7 +52,7 @@
     <div id='welTop'></div>
     <div id='welContent'>
         <div style='font-size:1.4rem;margin-bottom: 0.8rem;'>
-            尊敬的 <span style='color: #609850;font-size:1.4rem ;'> {{userName}} </span>女士：
+            尊敬的 <span style='color: #609850;font-size:1.4rem ;'> {{userName}} </span>：
         </div>
         <div style='font-size:1.8rem;margin-bottom: 0.8rem;'>您好！</div>
         <div>衷心感谢您对我们的信任，选择诺禾进行您的美肤基因检测体验之旅！</div>
@@ -85,7 +85,7 @@
             },
             methods: {
                 check: function () {
-                    location.href = 'report.html?' + jsonToSearch({uid: searchJson.uid, username: searchJson.username});
+                    location.href = 'report.html?' + jsonToSearch({orderid: searchJson.orderid, username: searchJson.username});
                 }
             },
             components: {

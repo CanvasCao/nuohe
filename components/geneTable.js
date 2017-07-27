@@ -13,7 +13,9 @@ var geneTable = Vue.extend({
         <table class="recon-table">\
                 <template v-for="(item,index) in dataTable">\
                     <tr :class="trClassName(index)">\
-                    <template v-for="(item2,index2) in item.data"><td>{{item2}}</td></template>\
+                    <template v-for="(item2,index2) in item.data">\
+                        <td width="25%">{{item2}}</td>\
+                    </template>\
                     </tr>\
                 </template>\
         </table>\
