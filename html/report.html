@@ -68,9 +68,13 @@
         </div>
 
         <div @click='toReportExplain' id='explain' class='normalButton'>报告阅读说明</div>
-        <div style='text-align: center;'>
-            <span @click='showShareMask($event)' class='specButton'>分享</span>
-            <span @click='showShareMask($event)' class='specButton'>收藏</span>
+
+        <div class='shareBtns'>
+            <span @click='showShareMask($event)'>
+                <i class='ion-ios-star-outline'></i>分享
+            </span><span @click='showShareMask($event)'>
+                <i class='ion-android-cloud-outline'></i>收藏
+            </span>
         </div>
 
         <div ref='shareMask' @click='hideShareMask($event)'

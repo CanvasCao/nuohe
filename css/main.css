@@ -46,17 +46,6 @@ input[type=checkbox] {
 
 }
 
-.specButton{
-    background: #3285FE;
-    color:white;
-    text-align: center;
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    box-sizing: border-box;
-    padding: 0.6rem 2rem;
-    display: inline-block;
-}
-
 .spec {
     color: #2C9CFF;
 }
@@ -443,7 +432,7 @@ input[type=checkbox] {
     color: white;
 }
 
-.honeyComb.disable{
+.honeyComb.disable {
     opacity: 0.4;
 }
 
@@ -517,6 +506,30 @@ input[type=checkbox] {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform:translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
     /*transition: all 0.5s ease ;*/
+}
+
+/*收藏分享css*/
+.shareBtns {
+    position: fixed;
+    bottom: 0;
+    background: white;
+    width: 100%;
+    border-top: 1px solid #eee;
+}
+
+.shareBtns > span {
+    width: 50%;
+    height: 4rem;
+    line-height: 4rem;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.shareBtns i {
+    margin: 0 0.5rem;
+    font-size: 1.3rem;
+
 }
